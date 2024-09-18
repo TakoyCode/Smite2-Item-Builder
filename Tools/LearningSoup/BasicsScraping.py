@@ -1,3 +1,6 @@
+# For this document i used these videos https://www.youtube.com/watch?v=bargNl2WeN4 and https://www.youtube.com/watch?v=xjA1HjvmoMY
+# To learn about the super basics about scraping, requests and BeautifulSoup
+
 from bs4 import BeautifulSoup
 import requests
 

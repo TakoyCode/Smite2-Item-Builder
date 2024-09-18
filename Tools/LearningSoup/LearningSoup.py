@@ -1,3 +1,6 @@
+# Wrote down the quick start from https://beautiful-soup-4.readthedocs.io/en/latest/#quick-start
+# To get a better understanding of how it worked
+
 from bs4 import BeautifulSoup
 
 html_doc = """
