@@ -47,3 +47,6 @@ print(table_row_data)
 #     i += 1
 #     if(i >= 7):
 #         break
+
+# test = "hello bing"
+# test.split()
