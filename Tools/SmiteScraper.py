@@ -41,16 +41,14 @@ for items in category:
         item_props = item.contents[1].find_all("li")
         final_props = [item.contents[0], f"Tier: {index}"] + [prop.text for prop in item_props]
         print(final_props)
-
-        # class finished_item:
-        #     Name = item_title
-        #     Properties = item_props
-        # print(finished_item.Name, finished_item.Properties)
-        # break
     index += 1
+        # break
     # break
 
-
+    # class finished_item:
+    #     Name = item_title
+    #     Properties = item_props
+    # print(finished_item.Name, finished_item.Properties)
 
 
 # print(items[0].find("li"))
