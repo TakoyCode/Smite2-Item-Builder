@@ -36,26 +36,26 @@ app.get('/api/consumables', (req, res) => {
 
 app.get('/api/items/:id', (req, res) => {
     const request = new sql.Request();
-    // Finds user
+    // Finds item
     request.query(`select * from Items where Id = ${req.params.id}`, (error, result) => {
-        // Checks for errors / or if we didn't find a user with the id
+        // Checks for errors / or if we didn't find a item with the id
         if (error) return res.status(400).send(error.message);
-        if (result.rowsAffected <= 0) return res.status(204).send('Could not find user.');
+        if (result.rowsAffected <= 0) return res.status(204).send('Could not find item.');
 
-        // Sends back found user
+        // Sends back found item
         res.send(result.recordset[0]);
     });
 });
 
 app.get('/api/consumables/:id', (req, res) => {
     const request = new sql.Request();
-    // Finds user
+    // Finds consumable
     request.query(`select * from Consumables where Id = ${req.params.id}`, (error, result) => {
-        // Checks for errors / or if we didn't find a user with the id
+        // Checks for errors / or if we didn't find a item with the id
         if (error) return res.status(400).send(error.message);
-        if (result.rowsAffected <= 0) return res.status(204).send('Could not find user.');
+        if (result.rowsAffected <= 0) return res.status(204).send('Could not find item.');
 
-        // Sends back found user
+        // Sends back found consumable
         res.send(result.recordset[0]);
     });
 });
@@ -73,72 +73,76 @@ app.post('/api/items', (req, res) => {
         sqlValueStr += `${i == 0 ? "" : ","}'${v}'`
     });
 
-    // Create new user in users table
+    // Create new item in items table
     const request = new sql.Request();
     request.query(`INSERT INTO Items(${sqlKeyStr}) OUTPUT INSERTED.* VALUES (${sqlValueStr})`, (error, result) => {
         // Checks for error
         if (error) return res.status(400).send(error.message);
 
-        // Sends the inputed user back
+        // Sends the inputed item back
         // console.log(result)
         res.status(201).send(result.recordset);
     });
 });
 
-// app.put('/api/items/:id', (req, res) => {
-//     // Validates the data
-//     const { error } = ValidateItem(req.body);
-//     if (error) return res.status(400).send(error.details[0].message);
+app.put('/api/items/:id', (req, res) => {
+    // Validates the data
+    const { error } = ValidateItem(req.body);
+    if (error) return res.status(400).send(error.details[0].message);
 
-//     // Deconstructs the data gotten from the req.body
-//     const { Name, Age, Email } = req.body;
+    const item = Object.entries(req.body)
+    let sqlInputValuesStr = "";
+    let sqlOutputValuesStr = "";
+    item.forEach(([k, v], i) => {
+        sqlInputValuesStr += `${k} = ${typeof (v) === 'string' ? `'${v}'` : v}${i == (item.length - 1) ? "" : ","}`
+        sqlOutputValuesStr += `inserted.${k}, deleted.${k} as old_${k}${i == (item.length - 1) ? "" : ","}`;
+    });
 
-//     const request = new sql.Request();
-//     // Check if we got a user with same id
-//     request.query(`select * from users where Id = ${req.params.id}`, (error, result) => {
-//         // Checks for errors / or if we didn't find a user with the id
-//         if (error) return res.status(400).send(error.message);
-//         if (result.rowsAffected <= 0) return res.status(204).send('Could not find user.');
-
-//         // Update user
-//         request.query(`UPDATE users SET Name = '${Name}', Age = ${Age}, Email = '${Email}' OUTPUT inserted.*, 
-//                         inserted.ID as old_ID, deleted.Name as old_Name, deleted.Age as old_Age, deleted.Email as old_Email Where ID = ${req.params.id};`,
-//             (error, result) => {
-//                 if (error) return res.status(400).send(error.message);
-//                 // Sends updated user back
-//                 res.send(result.recordset[0]);
-//             });
-//     });
-// });
-
-app.delete('/api/items/:id', (req, res) => {
     const request = new sql.Request();
-    // Find user
-    request.query(`select * from Items where Id = ${req.params.id}`, (error, result) => {
-        // Checks for errors / or if we didn't find a user with the id
+    // Check if we got a item with same id
+    request.query(`select * from items where Id = ${req.params.id}`, (error, result) => {
+        // Checks for errors / or if we didn't find a item with the id
         if (error) return res.status(400).send(error.message);
         if (result.rowsAffected <= 0) return res.status(204).send('Could not find item.');
 
-        // Delete user
+        // Update item
+        request.query(`UPDATE Items SET ${sqlInputValuesStr} OUTPUT ${sqlOutputValuesStr} Where ID = ${req.params.id};`,
+            (error, result) => {
+                if (error) return res.status(400).send(error.message);
+                // Sends updated item back
+                res.send(result.recordset[0]);
+            });
+    });
+});
+
+app.delete('/api/items/:id', (req, res) => {
+    const request = new sql.Request();
+    // Find item
+    request.query(`select * from Items where Id = ${req.params.id}`, (error, result) => {
+        // Checks for errors / or if we didn't find a item with the id
+        if (error) return res.status(400).send(error.message);
+        if (result.rowsAffected <= 0) return res.status(204).send('Could not find item.');
+
+        // Delete item
         request.query(`DELETE FROM Items OUTPUT DELETED.* Where ID = ${parseInt(req.params.id)};`, (error, result) => {
             if (error) return res.status(400).send(error.message);
-            // Sends back deleted user
+            // Sends back deleted item
             res.send(result.recordset[0]);
         });
     });
 });
 
 app.delete('/api/consumables/:id', (req, res) => {
-    // Find user
+    // Find item
     request.query(`select * from Consumables where Id = ${req.params.id}`, (error, result) => {
-        // Checks for errors / or if we didn't find a user with the id
+        // Checks for errors / or if we didn't find a item with the id
         if (error) return res.status(400).send(error.message);
         if (result.rowsAffected <= 0) return res.status(204).send('Could not find consumable.');
 
-        // Delete user
+        // Delete item
         request.query(`DELETE FROM Consumables OUTPUT DELETED.* Where ID = ${parseInt(req.params.id)};`, (error, result) => {
             if (error) return res.status(400).send(error.message);
-            // Sends back deleted user
+            // Sends back deleted item
             res.send(result.recordset[0]);
         });
     });
@@ -149,7 +153,7 @@ function ValidateItem(item) {
     const schema = Joi.object({
         Name: Joi.string().required(),
         Tier: Joi.number().required(),
-        GoldCost: Joi.number().required(),
+        Gold: Joi.number().required(),
         Strength: Joi.number(),
         Intelligence: Joi.number(),
         AttackSpeed: Joi.number(),
@@ -168,6 +172,7 @@ function ValidateItem(item) {
     });
     return schema.validate(item);
 }
+
 
 function ValidateConsumable(consumable) {
     const schema = Joi.object({
