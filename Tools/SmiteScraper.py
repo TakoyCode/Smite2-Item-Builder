@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup
 import requests
+import unicodedata
 # This is for finding where the security certificate is located
 # print(requests.certs.where())
 
@@ -42,49 +43,28 @@ def FormatItemProp(prop):
 
     return splitProps
 
+class Test(dict) : pass
+
 def GetItems():
     index = -1
     for items in category:
-        if(index >= -1): 
+        if(index >= 1): 
             for item in items:
                 itemProps = item.contents[1].find_all("li")
-                itemPropsText = [prop.text for prop in itemProps]
+                itemPropsText = [unicodedata.normalize("NFKD", prop.text) for prop in itemProps]
 
-                ItemWithFormatedProps = [["Name", item.contents[0]], ["Tier", index]]
+                ItemWithFormatedProps = [["Name", unicodedata.normalize("NFKD", item.contents[0])], ["Tier", index]]
                 for prop in itemPropsText:
                     itemProp = FormatItemProp(prop)
                     ItemWithFormatedProps.append(itemProp)
-                print(ItemWithFormatedProps)
+                
+                itemObj = Test()
+                for prop in ItemWithFormatedProps:
+                    setattr(itemObj, prop[0], prop[1])
+                # print(vars(itemObj))
+
+                headers = {'content-type': 'application/json'}
+                req = requests.post('http://localhost:3000/api/items', headers=headers, json=itemObj.__dict__)
+                print(req.content)
         index += 1
 GetItems()
-
-class a() : pass
-obj = a()
-obj.a = 3
-setattr(obj, "Name", 2)
-# print(vars(obj))
-
-
-# print(itemObj)
-# itemObj = {
-#             "Name" : item.contents[0],
-#             "Tier" : index,
-#             "Gold" : (item_props[0].text)[:-1],
-#             # for k, v in final_props:
-#             # return 
-#         }
-
-# class finished_item:
-#     Name = item_title
-#     Properties = item_props
-# print(finished_item.Name, finished_item.Properties)
-
-# class Item(object):
-#     pass
-
-# itemObj = Item()
-# itemObj.Name = item.contents[0]
-# itemObj.Tier = index
-# itemObj.Gold = (item_props[0].text)[:-1]
-# print(itemObj)
-

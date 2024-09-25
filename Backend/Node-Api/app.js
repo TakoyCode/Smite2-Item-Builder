@@ -61,6 +61,7 @@ app.get('/api/consumables/:id', (req, res) => {
 });
 
 app.post('/api/items', (req, res) => {
+    console.log(req.body)
     // Validates the data
     const { error } = ValidateItem(req.body);
     if (error) return res.status(400).send(error.details[0].message);
@@ -70,13 +71,17 @@ app.post('/api/items', (req, res) => {
     let sqlValueStr = "";
     item.forEach(([k, v], i) => {
         sqlKeyStr += `${i == 0 ? "" : ","}${k}`
-        sqlValueStr += `${i == 0 ? "" : ","}'${v}'`
+        // sqlValueStr += `${i == 0 ? "" : ","}"${v}"`
+        if (typeof (v) == String) v = v
+        sqlValueStr += `${typeof (v) === 'string' ? `'${v.replace("'", "''")}'` : v}${i == (item.length - 1) ? "" : ","}`
     });
 
     // Create new item in items table
     const request = new sql.Request();
     request.query(`INSERT INTO Items(${sqlKeyStr}) OUTPUT INSERTED.* VALUES (${sqlValueStr})`, (error, result) => {
         // Checks for error
+        // console.log(error)
+        // console.log(`INSERT INTO Items(${sqlKeyStr}) OUTPUT INSERTED.* VALUES (${sqlValueStr})`)
         if (error) return res.status(400).send(error.message);
 
         // Sends the inputed item back
@@ -94,7 +99,7 @@ app.put('/api/items/:id', (req, res) => {
     let sqlInputValuesStr = "";
     let sqlOutputValuesStr = "";
     item.forEach(([k, v], i) => {
-        sqlInputValuesStr += `${k} = ${typeof (v) === 'string' ? `'${v}'` : v}${i == (item.length - 1) ? "" : ","}`
+        sqlInputValuesStr += `${k} = ${typeof (v) === 'string' ? `'${v.replace("'", "''")}'` : v}${i == (item.length - 1) ? "" : ","}`
         sqlOutputValuesStr += `inserted.${k}, deleted.${k} as old_${k}${i == (item.length - 1) ? "" : ","}`;
     });
 
