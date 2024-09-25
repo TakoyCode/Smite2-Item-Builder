@@ -43,7 +43,7 @@ def FormatItemProp(prop):
 
     return splitProps
 
-class Test(dict) : pass
+class Obj() : pass
 
 def GetItems():
     index = -1
@@ -58,7 +58,7 @@ def GetItems():
                     itemProp = FormatItemProp(prop)
                     ItemWithFormatedProps.append(itemProp)
                 
-                itemObj = Test()
+                itemObj = Obj()
                 for prop in ItemWithFormatedProps:
                     setattr(itemObj, prop[0], prop[1])
                 # print(vars(itemObj))
@@ -68,3 +68,4 @@ def GetItems():
                 print(req.content)
         index += 1
 GetItems()
+
