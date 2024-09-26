@@ -26,7 +26,12 @@ unordered_lists = soup.find_all("ul", recursive=False)
 
 category = [categories.find_all("li", recursive=False) for categories in unordered_lists]
 
+class Obj() : pass
+
 def FormatItemProp(prop):
+    if("Item is automatically consumed" in prop):
+        return ["Active", prop]
+
     if(": " in prop):
         return prop.split(": ", 1)
     
@@ -35,6 +40,7 @@ def FormatItemProp(prop):
         return goldProp
         
     splitProps = prop.split()
+
     if(len(splitProps) >= 3):
         splitProps = (["".join(splitProps[ :-1])] + splitProps[-1:])
 
@@ -43,29 +49,40 @@ def FormatItemProp(prop):
 
     return splitProps
 
-class Obj() : pass
+def SaveItemInDB(index, itemObj):
+    headers = {'content-type': 'application/json'}
+    if(index == -1):
+        req = requests.post('http://localhost:3000/api/relics', headers=headers, json=itemObj.__dict__)
+
+    if(index == 0):
+        req = requests.post('http://localhost:3000/api/consumables', headers=headers, json=itemObj.__dict__)
+
+    if(index >= 1):
+        req = requests.post('http://localhost:3000/api/items', headers=headers, json=itemObj.__dict__)
+    # print(req.content)
 
 def GetItems():
     index = -1
     for items in category:
-        if(index >= 1): 
+        if(index == -1): 
             for item in items:
                 itemProps = item.contents[1].find_all("li")
                 itemPropsText = [unicodedata.normalize("NFKD", prop.text) for prop in itemProps]
 
-                ItemWithFormatedProps = [["Name", unicodedata.normalize("NFKD", item.contents[0])], ["Tier", index]]
+                ItemWithFormatedProps = [["Name", unicodedata.normalize("NFKD", item.contents[0])]]
+                if(index >= 1): ItemWithFormatedProps.append(["Tier", index])
                 for prop in itemPropsText:
                     itemProp = FormatItemProp(prop)
                     ItemWithFormatedProps.append(itemProp)
-                
+
                 itemObj = Obj()
                 for prop in ItemWithFormatedProps:
                     setattr(itemObj, prop[0], prop[1])
-                # print(vars(itemObj))
+                print(vars(itemObj))
 
-                headers = {'content-type': 'application/json'}
-                req = requests.post('http://localhost:3000/api/items', headers=headers, json=itemObj.__dict__)
-                print(req.content)
+                # SaveItemInDB(index, itemObj)
         index += 1
 GetItems()
+
+
 
