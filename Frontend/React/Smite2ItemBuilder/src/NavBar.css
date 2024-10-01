@@ -1,7 +1,15 @@
-.nav-link {
+body {
+    font-family: 'Outfit';
+}
+
+/* .nav-link {
     color: rgb(186, 190, 195);
 }
 
 .nav-link:hover {
     color: rgb(224, 175, 100);
 }
+
+.nav-link.disabled {
+    color: rgb(224, 175, 100);
+} */
