@@ -1,5 +1,5 @@
 import 'bootstrap/dist/js/bootstrap.bundle';
-import 'bootstrap/dist/css/bootstrap.css'
+import './css/main.min.css'
 
 import './fonts/Outfit.css'
 import './NavBar.css';
@@ -9,14 +9,14 @@ function NavBar() {
         <div className="container mt-4">
             <nav className="navbar navbar-expand rounded-4"
                 style={{ background: "rgb(26, 40, 56)" }}>
-                <div className="container-fluid fs-5">
+                <div className="container-fluid fs-5 navbar-nav">
                     <a href="#" className="navbar-brand">
                         <img src=".\src\assets\Smite2-Logo_FINAL-Flat-OneColor-Gold1.png"
                             alt="Smite2 Logo NoBackground" height={40} />
                     </a>
                     <ul className="navbar-nav me-auto ">
                         <li className="nav-item ms-3">
-                            <a className="nav-link" href="#">Gods</a>
+                            <a className="nav-link disabled" href="#">Gods</a>
                         </li>
                         <li className="nav-item ms-3">
                             <a className="nav-link" href="#">Builds</a>

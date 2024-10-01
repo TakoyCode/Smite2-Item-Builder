@@ -1,0 +1,9 @@
+$nav-color-main: rgb(186, 190, 195);
+$nav-color-secondary: rgb(224, 175, 100);
+
+$navbar-light-color: rgba($nav-color-main, .55);
+$navbar-light-hover-color: rgba($nav-color-secondary, .7);
+$navbar-light-active-color: rgba($nav-color-secondary, .9);
+$navbar-light-disabled-color: rgba($nav-color-main, .3);
+
+@import "../node_modules/bootstrap//scss/bootstrap.scss"
