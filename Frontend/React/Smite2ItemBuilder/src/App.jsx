@@ -1,11 +1,11 @@
-import NavBar from './NavBar.jsx'
-import './NavBar.css';
-
+import NavBar from "./components/Navbar/NavBar.jsx"
+import ItemBuilder from "./pages/ItemBuilder"
 
 function App() {
   return (
     <>
       <NavBar />
+      <ItemBuilder />
     </>
   )
 }
