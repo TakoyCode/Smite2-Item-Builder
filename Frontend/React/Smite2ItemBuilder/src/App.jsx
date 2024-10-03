@@ -4,10 +4,9 @@ import ItemBuilder from "./pages/ItemBuilder"
 import { useState, useEffect } from "react";
 
 function App() {
-  const [items, setItems] = useState();
+  const [items, setItems] = useState([]);
 
   useEffect(() => {
-
     GetItems();
     async function GetItems() {
       try {
@@ -17,7 +16,7 @@ function App() {
             "Content-Type": "application/json",
           },
         })
-        console.log(await response.json())
+        setItems(await response.json());
       }
       catch (error) {
         console.error(error)
@@ -30,7 +29,7 @@ function App() {
     <>
       <NavBar />
       {/* <ItemBuilder /> */}
-      <ItemSelector />
+      <ItemSelector items={items} />
     </>
   )
 }
