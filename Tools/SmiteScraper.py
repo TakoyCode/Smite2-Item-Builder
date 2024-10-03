@@ -82,7 +82,8 @@ def GetItems():
 
                 # SaveItemInDB(index, itemObj)
         index += 1
-GetItems()
+# GetItems()
 
 
 
+print("true" if True else "false")
