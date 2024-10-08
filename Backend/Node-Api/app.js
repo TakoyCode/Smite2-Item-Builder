@@ -3,7 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const app = express();
 
-app.use(express.json());
+app.use(express.json({ limit: '50mb' }));
 app.use(cors());
 
 
@@ -94,16 +94,18 @@ app.post('/api/items', (req, res) => {
     const { error } = ValidateItem(req.body);
     if (error) return res.status(400).send(error.details[0].message);
 
+    const request = new sql.Request();
+
     const item = Object.entries(req.body)
     let sqlKeyStr = "";
     let sqlValueStr = "";
     item.forEach(([k, v], i) => {
         sqlKeyStr += `${i == 0 ? "" : ","}${k}`
-        sqlValueStr += `${typeof (v) === 'string' ? `'${v.replace("'", "''")}'` : v}${i == (item.length - 1) ? "" : ","}`
+        sqlValueStr += `@${k}${i == (item.length - 1) ? "" : ","}`
+        k === "Img" ? request.input(k, sql.VarBinary(sql.Max), new Buffer.from(v.data)) : request.input(k, v);
     });
 
     // Create new item in items table
-    const request = new sql.Request();
     request.query(`INSERT INTO Items(${sqlKeyStr}) OUTPUT INSERTED.* VALUES (${sqlValueStr})`, (error, result) => {
         // Checks for error
         if (error) return res.status(400).send(error.message);
@@ -166,15 +168,17 @@ app.put('/api/items/:id', (req, res) => {
     const { error } = ValidateItem(req.body);
     if (error) return res.status(400).send(error.details[0].message);
 
+    const request = new sql.Request();
+
     const item = Object.entries(req.body)
     let sqlInputValuesStr = "";
     let sqlOutputValuesStr = "";
     item.forEach(([k, v], i) => {
-        sqlInputValuesStr += `${k} = ${typeof (v) === 'string' ? `'${v.replace("'", "''")}'` : v}${i == (item.length - 1) ? "" : ","}`
+        sqlInputValuesStr += `${k} = @${k}${i == (item.length - 1) ? "" : ","}`
         sqlOutputValuesStr += `inserted.${k}, deleted.${k} as old_${k}${i == (item.length - 1) ? "" : ","}`;
+        k === "Img" ? request.input(k, sql.VarBinary(sql.Max), new Buffer.from(v.data)) : request.input(k, v);
     });
 
-    const request = new sql.Request();
     // Check if we got a item with same id
     request.query(`select * from items where Id = ${req.params.id}`, (error, result) => {
         // Checks for errors / or if we didn't find a item with the id
@@ -184,6 +188,7 @@ app.put('/api/items/:id', (req, res) => {
         // Update item
         request.query(`UPDATE Items SET ${sqlInputValuesStr} OUTPUT ${sqlOutputValuesStr} Where ID = ${req.params.id};`,
             (error, result) => {
+                if (error) console.log(error.message);
                 if (error) return res.status(400).send(error.message);
                 // Sends updated item back
                 res.send(result.recordset[0]);
@@ -309,21 +314,22 @@ function ValidateItem(item) {
         Name: Joi.string().required(),
         Tier: Joi.number().required(),
         Gold: Joi.number().required(),
-        Strength: Joi.number(),
-        Intelligence: Joi.number(),
-        AttackSpeed: Joi.number(),
-        Lifesteal: Joi.number(),
-        CriticalChance: Joi.number(),
-        Penetration: Joi.number(),
-        PhysicalProtection: Joi.number(),
-        MagicalProtection: Joi.number(),
-        MaxHealth: Joi.number(),
-        HealthRegen: Joi.number(),
-        MaxMana: Joi.number(),
-        ManaRegen: Joi.number(),
-        CooldownRate: Joi.number(),
-        Passive: Joi.string(),
-        Active: Joi.string(),
+        Strength: Joi.number().allow(null),
+        Intelligence: Joi.number().allow(null),
+        AttackSpeed: Joi.number().allow(null),
+        Lifesteal: Joi.number().allow(null),
+        CriticalChance: Joi.number().allow(null),
+        Penetration: Joi.number().allow(null),
+        PhysicalProtection: Joi.number().allow(null),
+        MagicalProtection: Joi.number().allow(null),
+        MaxHealth: Joi.number().allow(null),
+        HealthRegen: Joi.number().allow(null),
+        MaxMana: Joi.number().allow(null),
+        ManaRegen: Joi.number().allow(null),
+        CooldownRate: Joi.number().allow(null),
+        Passive: Joi.string().allow(null),
+        Active: Joi.string().allow(null),
+        Img: Joi.binary().allow(null),
     });
     return schema.validate(item);
 }
