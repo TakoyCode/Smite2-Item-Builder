@@ -65,10 +65,16 @@ async function AddImgToItems() {
     const imagesFolder = path.join(__dirname, 'Item Icons');
 
     for (const item of Items) {
-        // let iconName = `${item.Name}.png`.replaceAll("'", "_")
         const iconName = `${item.Name}.png`
+        let iconPath = null;
 
-        const iconPath = findFileRecursively(imagesFolder, iconName);
+        if (item.Name.includes("'")) {
+            iconPath = findFileRecursively(imagesFolder, iconName.replaceAll("'", "_")) || findFileRecursively(imagesFolder, iconName.replaceAll("'", ""));
+        }
+        else {
+            iconPath = findFileRecursively(imagesFolder, iconName) || findFileRecursively(imagesFolder, iconName.replaceAll(" ", ""));
+        }
+
         let iconData = null;
 
         if (iconPath && fs.existsSync(iconPath)) {
