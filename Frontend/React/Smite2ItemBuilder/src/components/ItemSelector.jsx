@@ -6,7 +6,7 @@ export default function ItemSelector(props) {
             <div className="d-flex flex-wrap gap-4 py-4 justify-content-center">
                 {
                     props.items.map((item, i) => {
-                        return <ItemDiv Key={i} Item={item} />
+                        return <ItemDiv key={i} Item={item} />
                     })
                 }
             </div>
