@@ -16,12 +16,25 @@ function App() {
             "Content-Type": "application/json",
           },
         })
-        setItems(await response.json());
+
+        const tempItems = await response.json();
+
+        tempItems.forEach(item => {
+          if (item.Img) {
+            console.log(item)
+            // base64String = btoa(String.fromCharCode(...Item.Img.data));
+            // base64String = btoa(String.fromCharCode(...new Uint8Array(Item.Img.data)));
+            item.Img = Buffer.from(item.Img, 'binary').toString('base64');
+          }
+        });
+
+        setItems(tempItems);
       }
       catch (error) {
         console.error(error)
       }
     }
+
   }, []);
 
   return (
