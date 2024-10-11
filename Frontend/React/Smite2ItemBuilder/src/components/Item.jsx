@@ -1,6 +1,6 @@
 export default function ItemDiv({ Item }) {
     if (Item === undefined) return;
-    console.log(Item)
+    // console.log(Item)
 
     return (
         <div style={{ width: 75 }}>

@@ -2,31 +2,32 @@ import 'bootstrap/dist/js/bootstrap.bundle';
 import '../../css/main.min.css'
 import '../../fonts/Outfit.css'
 import './NavBar.css';
+import { Link } from "react-router-dom";
 
 function NavBar() {
     return (
         <div className="container mt-4">
             <nav className="navbar navbar-expand rounded-4 navbar-background">
                 <div className="container-fluid fs-5 navbar-nav px-2">
-                    <a href="#" className="navbar-brand">
+                    <Link to="/" className="navbar-brand">
                         <img src=".\src\assets\Smite2-Logo_FINAL-Flat-OneColor-Gold1.png"
                             alt="Smite2 Logo NoBackground" height={45} />
-                    </a>
+                    </Link>
                     <ul className="navbar-nav me-auto ">
                         <li className="nav-item ms-3">
-                            <a className="nav-link" href="#">Gods</a>
+                            <Link className="nav-link" to="#">Gods</Link>
                         </li>
                         <li className="nav-item ms-3">
-                            <a className="nav-link" href="#">Builds</a>
+                            <Link className="nav-link" to="/Builds">Builds</Link>
                         </li>
                         <li className="nav-item ms-3">
-                            <a className="nav-link " href="#">Statistics</a>
+                            <Link className="nav-link " to="#">Statistics</Link>
                         </li>
                         <li className="nav-item ms-3">
-                            <a className="nav-link" href="#">Item Builder</a>
+                            <Link className="nav-link" to="/Item-Builder">Item Builder</Link>
                         </li>
                     </ul>
-                    <a className="nav-link" href="#">Sign In</a>
+                    <Link className="nav-link" to="#">Sign In</Link>
                     <img src=".\src\assets\LoginIcon.png"
                         alt="LoginIcon" height={30}
                         className="m-2" />

@@ -1,7 +1,8 @@
 import ItemSelector from "./components/ItemSelector.jsx"
-import NavBar from "./components/Navbar/NavBar.jsx"
 import ItemBuilder from "./pages/ItemBuilder"
+import NavBar from "./components/Navbar/NavBar.jsx"
 import { useState, useEffect } from "react";
+import { Outlet } from "react-router-dom";
 
 function App() {
   const [items, setItems] = useState([]);
@@ -21,7 +22,7 @@ function App() {
 
         tempItems.forEach(item => {
           if (item.Img) {
-            console.log(item)
+            // console.log(item)
             // base64String = btoa(String.fromCharCode(...Item.Img.data));
             // base64String = btoa(String.fromCharCode(...new Uint8Array(Item.Img.data)));
             item.Img = Buffer.from(item.Img, 'binary').toString('base64');
@@ -40,8 +41,9 @@ function App() {
   return (
     <>
       <NavBar />
+      <Outlet items={items} />
       {/* <ItemBuilder /> */}
-      <ItemSelector items={items} />
+      {/* <ItemSelector items={items} /> */}
     </>
   )
 }
