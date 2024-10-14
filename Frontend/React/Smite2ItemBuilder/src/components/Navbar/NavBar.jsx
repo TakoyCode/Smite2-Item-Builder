@@ -1,6 +1,5 @@
 import 'bootstrap/dist/js/bootstrap.bundle';
 import '../../css/main.min.css'
-import '../../fonts/Outfit.css'
 import './NavBar.css';
 import { Link } from "react-router-dom";
 

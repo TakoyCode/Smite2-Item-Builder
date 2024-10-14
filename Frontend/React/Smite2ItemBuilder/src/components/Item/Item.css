@@ -1,0 +1,8 @@
+.Item-Image {
+    height: 75px;
+    outline: 2px solid rgb(221, 161, 70);
+}
+
+.Item-Text {
+    color: rgb(191, 183, 180);
+}

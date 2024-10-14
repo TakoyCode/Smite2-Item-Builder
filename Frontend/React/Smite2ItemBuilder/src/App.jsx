@@ -1,51 +1,57 @@
-import ItemSelector from "./components/ItemSelector.jsx"
-import ItemBuilder from "./pages/ItemBuilder"
 import NavBar from "./components/Navbar/NavBar.jsx"
+
 import { useState, useEffect } from "react";
 import { Outlet } from "react-router-dom";
 
-function App() {
-  const [items, setItems] = useState([]);
+let items = null;
+export async function loader() {
+  if (items) return items;
+  items = await GetItems();
+  // console.log("New loader fetch")
+  // console.log(items)
+  return items;
+}
 
-  useEffect(() => {
-    GetItems();
-    async function GetItems() {
-      try {
-        const response = await fetch('http://localhost:3000/api/items', {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        })
+async function GetItems() {
+  try {
+    const response = await fetch('http://localhost:3000/api/items', {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
 
-        const tempItems = await response.json();
+    const items = await response.json();
 
-        tempItems.forEach(item => {
-          if (item.Img) {
-            // console.log(item)
-            // base64String = btoa(String.fromCharCode(...Item.Img.data));
-            // base64String = btoa(String.fromCharCode(...new Uint8Array(Item.Img.data)));
-            item.Img = Buffer.from(item.Img, 'binary').toString('base64');
-          }
-        });
-
-        setItems(tempItems);
+    items.forEach(item => {
+      if (item.Img) {
+        item.Img = Buffer.from(item.Img, 'binary').toString('base64');
       }
-      catch (error) {
-        console.error(error)
-      }
-    }
+    });
 
-  }, []);
+    return items;
+  }
+  catch (error) {
+    console.error(error)
+  }
+}
+
+export default function App() {
+  // const [items, setItems] = useState([]);
+
+  // useEffect(() => {
+  //   const fetchItems = async () => {
+  //     const tempItems = GetItems();
+  //     setItems(tempItems);
+  //   }
+  //   fetchItems().catch(console.error);
+  // }, []);
 
   return (
     <>
       <NavBar />
-      <Outlet items={items} />
-      {/* <ItemBuilder /> */}
-      {/* <ItemSelector items={items} /> */}
+      <Outlet />
     </>
   )
 }
 
-export default App
