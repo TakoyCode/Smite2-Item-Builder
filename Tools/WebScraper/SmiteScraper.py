@@ -84,6 +84,4 @@ def GetItems():
         index += 1
 # GetItems()
 
-
-
 print("true" if True else "false")

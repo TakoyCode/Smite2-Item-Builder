@@ -6,3 +6,12 @@
 .Item-Text {
     color: rgb(191, 183, 180);
 }
+
+.dropdown-menu {
+    box-shadow: 3px 3px 5px rgb(19, 29, 41);
+    border: 2px solid rgb(19, 29, 41);
+}
+
+/* .dropdown-center:hover .dropdown-menu {
+        display: block;
+    } */
