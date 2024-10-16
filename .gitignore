@@ -1,7 +1,9 @@
 # Sass
 main.min.css*
 
-# Python
+# Python Webscraper
+SmiteSiteVisual.html
+SmiteSiteVisual2.html
 .venv
 venv/
 venv.bak/

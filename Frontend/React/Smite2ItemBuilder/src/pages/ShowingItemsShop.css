@@ -1,0 +1,22 @@
+.Role-Filter div {
+    background-color: rgb(19, 29, 41);
+    border: 1px solid rgb(34, 51, 73);
+    height: 50px;
+    width: 100px;
+    cursor: pointer;
+}
+
+.Role-Filter div:hover {
+    background-color: rgb(34, 51, 73);
+    border: 1px solid rgb(19, 29, 41);
+}
+
+
+.Item-Filter div {
+    cursor: pointer;
+}
+
+.Item-Filter div img {
+    width: 25px;
+    height: 25px;
+}

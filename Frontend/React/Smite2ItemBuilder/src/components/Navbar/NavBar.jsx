@@ -17,10 +17,10 @@ function NavBar() {
                             <Link className="nav-link" to="#">Gods</Link>
                         </li>
                         <li className="nav-item ms-3">
-                            <Link className="nav-link" to="/Builds">Builds</Link>
+                            <Link className="nav-link" to="/Items">Items</Link>
                         </li>
                         <li className="nav-item ms-3">
-                            <Link className="nav-link " to="#">Statistics</Link>
+                            <Link className="nav-link " to="/Shop">Builds</Link>
                         </li>
                         <li className="nav-item ms-3">
                             <Link className="nav-link" to="/Item-Builder">Item Builder</Link>

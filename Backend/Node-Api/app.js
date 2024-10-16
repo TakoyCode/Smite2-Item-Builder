@@ -15,14 +15,32 @@ const { sql } = require('./db');
 //  --- HTTP metods---
 app.get('/api/items', (req, res) => {
     const request = new sql.Request();
-    // Get all items
-    request.query('select * from Items', (error, result) => {
-        // Checks for errors
-        if (error) return res.status(400).send(error.message);
 
-        // Sends back all items
-        res.send(result.recordset);
-    });
+    if (req.query.format) {
+        // Get all items
+        request.query(`SELECT Id, Name, Tier, Gold, Strength, Intelligence, AttackSpeed as 'Attack Speed', Lifesteal,
+                        CriticalChance as 'Critical Chance', Penetration, PhysicalProtection  as 'Physical Protection', 
+                        MagicalProtection as 'Magical Protection', MaxHealth as 'Max Health', HealthRegen as 'Health Regen', 
+                        MaxMana as 'Max Mana', ManaRegen as 'Mana Regen', CooldownRate as 'Cooldown Rate', Passive, Active, Img
+                        FROM Items`,
+            (error, result) => {
+                // Checks for errors
+                if (error) return res.status(400).send(error.message);
+
+                // Sends back all items
+                res.send(result.recordset);
+            });
+    }
+    else {
+        // Get all items
+        request.query('select * from Items', (error, result) => {
+            // Checks for errors
+            if (error) return res.status(400).send(error.message);
+
+            // Sends back all items
+            res.send(result.recordset);
+        });
+    }
 });
 
 app.get('/api/consumables', (req, res) => {

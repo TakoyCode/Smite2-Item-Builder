@@ -1,4 +1,4 @@
-import Item from "./Item/Item";
+import Item from "../components/Item/ItemWDropdown";
 import { useLoaderData } from "react-router-dom";
 
 export default function ItemSelector() {

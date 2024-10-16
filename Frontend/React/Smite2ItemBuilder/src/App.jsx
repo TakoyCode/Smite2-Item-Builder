@@ -1,6 +1,4 @@
 import NavBar from "./components/Navbar/NavBar.jsx"
-
-import { useState, useEffect } from "react";
 import { Outlet } from "react-router-dom";
 
 let items = null;
@@ -14,7 +12,7 @@ export async function loader() {
 
 async function GetItems() {
   try {
-    const response = await fetch('http://localhost:3000/api/items', {
+    const response = await fetch('http://localhost:3000/api/items?format=true', {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

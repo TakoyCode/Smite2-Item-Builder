@@ -5,7 +5,8 @@ import { createBrowserRouter, RouterProvider, } from 'react-router-dom';
 import App, { loader as itemLoader } from './App.jsx'
 import ErrorPage from './pages/ErrorPage.jsx';
 import ItemBuilder from './pages/ItemBuilder.jsx';
-import ItemSelector from "./components/ItemSelector.jsx";
+import ShowingItemsGrid from "./pages/ShowingItemsGrid.jsx";
+import ShowingItemsShop from "./pages/ShowingItemsShop.jsx";
 
 import './index.css'
 import './fonts/Outfit.css'
@@ -22,8 +23,13 @@ const router = createBrowserRouter([
         element: <ItemBuilder />,
       },
       {
-        path: "Builds",
-        element: <ItemSelector />,
+        path: "Items",
+        element: <ShowingItemsGrid />,
+        loader: itemLoader,
+      },
+      {
+        path: "Shop",
+        element: <ShowingItemsShop />,
         loader: itemLoader,
       },
     ],
