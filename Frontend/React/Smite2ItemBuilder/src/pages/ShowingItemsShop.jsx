@@ -40,7 +40,7 @@ export default function ItemSelector() {
     }
 
     return (
-        <div className="container d-flex my-4 py-2 rounded" style={{ background: "rgb(23,35,49)" }}>
+        <div className="container my-4 py-2 rounded" style={{ background: "rgb(23,35,49)" }}>
             {/* <div className="Role-Filter gap-1 justify-content-between d-flex text-light">
                 <div className="flex-fill text-center" onClick={changeChosenRoleFilter}
                     style={chosenRoleFilter === "All" ? activeRole : inActiveRole}>All</div>
@@ -134,7 +134,7 @@ export default function ItemSelector() {
                 </div>
 
                 <div className="container rounded overflow-auto"
-                    style={{ background: "rgb(23,35,49)", maxHeight: 675, maxWidth: 525 }}>
+                    style={{ background: "rgb(23,35,49)", maxHeight: 625, maxWidth: 550, margin: 0 }}>
                     <div className="d-flex flex-wrap gap-4 mt-1 justify-content-center">
                         {
                             (filteredItems || items).map((item, i) => {
