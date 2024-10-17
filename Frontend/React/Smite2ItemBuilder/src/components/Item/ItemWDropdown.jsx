@@ -24,7 +24,7 @@ export default function ItemDiv({ item }) {
                         if (!v) return;
                         if (noShowProps.includes(k)) return;
                         return (
-                            <li>
+                            <li key={i}>
                                 <span className="dropdown-item-text" style={{ color: "rgb(186, 190, 195)" }}
                                 >{v}{showPropsInPercent.includes(k) ? "%" : ""} {k}</span>
                             </li>
@@ -39,7 +39,7 @@ export default function ItemDiv({ item }) {
                         if (!v) return;
                         if (k === "Passive" || k === "Active") {
                             return (
-                                <li>
+                                <li key={i}>
                                     <span className="dropdown-item-text" style={{ color: "rgb(186, 190, 195)" }}
                                     >{k}: {v}</span>
                                 </li>
