@@ -7,7 +7,14 @@ import { Link } from "react-router-dom";
 function NavBar() {
     const [currentLink, setCurrentLink] = useState("/");
 
-    const handleSetCurrentLink = (e) => { setCurrentLink(e.target.attributes.href.value); }
+    const handleSetCurrentLink = (href) => { setCurrentLink(href); }
+
+    const links = [
+        { href: "/", Name: "Gods" },
+        { href: "/Items", Name: "Items" },
+        { href: "/Shop", Name: "Builds" },
+        { href: "/Item-Builder", Name: "Item Builder" },
+    ];
 
     return (
         <div className="container mt-4">
@@ -18,6 +25,14 @@ function NavBar() {
                             alt="Smite2 Logo NoBackground" height={45} onClick={handleSetCurrentLink} />
                     </Link>
                     <ul className="navbar-nav me-auto">
+                        {/* {
+                            links.map((l, i) => (
+                                <li className="nav-item ms-3" key={i}>
+                                    <Link className={(currentLink === l.href ? "nav-link active" : "nav-link")} to={l.href}
+                                        onClick={() => handleSetCurrentLink(href)}>{l.Name}</Link>
+                                </li>
+                            ))
+                        } */}
                         <li className="nav-item ms-3">
                             <Link className={(currentLink === "/" ? "nav-link active" : "nav-link")} to="/" onClick={handleSetCurrentLink}>Gods</Link>
                         </li>

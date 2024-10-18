@@ -134,8 +134,8 @@ export default function ItemSelector() {
                 </div>
 
                 <div className="container rounded overflow-auto"
-                    style={{ background: "rgb(23,35,49)", maxHeight: 625, maxWidth: 550, margin: 0 }}>
-                    <div className="d-flex flex-wrap gap-4 mt-1 justify-content-center">
+                    style={{ background: "rgb(23,35,49)", maxHeight: 625, maxWidth: 410, margin: 0 }}>
+                    <div className="d-flex flex-wrap gap-4 mt-1">
                         {
                             (filteredItems || items).map((item, i) => {
                                 return <Item key={i} item={item} />
