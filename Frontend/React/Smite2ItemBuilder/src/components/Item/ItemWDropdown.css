@@ -4,6 +4,14 @@
     cursor: pointer;
 }
 
+/* Border instead of outline version 
+.Item-Image {
+    height: 79px;
+    border: 2px solid rgb(221, 161, 70);
+    cursor: pointer;
+} */
+
+
 .Item-Text {
     color: rgb(191, 183, 180);
 }

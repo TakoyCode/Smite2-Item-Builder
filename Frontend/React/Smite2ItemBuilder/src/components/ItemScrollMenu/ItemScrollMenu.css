@@ -1,0 +1,26 @@
+/* width */
+.Item-Container::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+.Item-Container::-webkit-scrollbar-track {
+    background: rgb(26, 40, 57);
+    border-radius: 20px;
+}
+
+/* Handle */
+.Item-Container::-webkit-scrollbar-thumb {
+    background: rgb(19, 29, 41);
+    border-radius: 20px;
+}
+
+/* Handle on hover */
+.Item-Container::-webkit-scrollbar-thumb:hover {
+    background: rgb(13, 19, 27);
+    cursor: grab;
+}
+
+.Item-Container::-webkit-scrollbar-thumb:hover:active {
+    cursor: grabbing;
+}
