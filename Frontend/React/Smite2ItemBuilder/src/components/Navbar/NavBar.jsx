@@ -9,11 +9,11 @@ function NavBar() {
 
     const handleSetCurrentLink = (href) => { setCurrentLink(href); }
 
-    const links = [
-        { href: "/", Name: "Gods" },
-        { href: "/Items", Name: "Items" },
-        { href: "/Shop", Name: "Builds" },
-        { href: "/Item-Builder", Name: "Item Builder" },
+    const textLinks = [
+        { href: "/", Text: "Gods" },
+        { href: "/Items", Text: "Items" },
+        { href: "/Shop", Text: "Builds" },
+        { href: "/Item-Builder", Text: "Item Builder" },
     ];
 
     return (
@@ -25,26 +25,14 @@ function NavBar() {
                             alt="Smite2 Logo NoBackground" height={45} onClick={handleSetCurrentLink} />
                     </Link>
                     <ul className="navbar-nav me-auto">
-                        {/* {
-                            links.map((l, i) => (
+                        {
+                            textLinks.map((link, i) => (
                                 <li className="nav-item ms-3" key={i}>
-                                    <Link className={(currentLink === l.href ? "nav-link active" : "nav-link")} to={l.href}
-                                        onClick={() => handleSetCurrentLink(href)}>{l.Name}</Link>
+                                    <Link className={(currentLink === link.href ? "nav-link active" : "nav-link")} to={link.href}
+                                        onClick={() => handleSetCurrentLink(link.href)}>{link.Text}</Link>
                                 </li>
                             ))
-                        } */}
-                        <li className="nav-item ms-3">
-                            <Link className={(currentLink === "/" ? "nav-link active" : "nav-link")} to="/" onClick={handleSetCurrentLink}>Gods</Link>
-                        </li>
-                        <li className="nav-item ms-3">
-                            <Link className={(currentLink === "/Items" ? "nav-link active" : "nav-link")} to="/Items" onClick={handleSetCurrentLink}>Items</Link>
-                        </li>
-                        <li className="nav-item ms-3">
-                            <Link className={(currentLink === "/Shop" ? "nav-link active" : "nav-link")} to="/Shop" onClick={handleSetCurrentLink}>Builds</Link>
-                        </li>
-                        <li className="nav-item ms-3">
-                            <Link className={(currentLink === "/Item-Builder" ? "nav-link active" : "nav-link")} to="/Item-Builder" onClick={handleSetCurrentLink}>Item Builder</Link>
-                        </li>
+                        }
                     </ul>
                     <Link className="nav-link" to="#" onClick={handleSetCurrentLink}>Sign In</Link>
                     <img src=".\src\assets\LoginIcon.png"
