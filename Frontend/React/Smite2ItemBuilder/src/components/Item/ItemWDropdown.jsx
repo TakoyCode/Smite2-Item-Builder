@@ -7,7 +7,10 @@ export default function ItemDiv({ item }) {
 
     const itemEntry = Object.entries(item);
     const noShowProps = ["Name", "Id", "Tier", "Img", "Gold", "Passive", "Active"];
-    const showPropsInPercent = ["Attack Speed", "Lifesteal", "Critical Chance", "Penetration"];
+    const showPropsInPercent = [
+        "Attack Speed", "divfesteal", "Critical Chance",
+        "Physical Penetration", "Magical Penetration", "Movement Speed"
+    ];
 
     return (
         <div className="dropdown-center" style={{ width: 75 }}>
@@ -41,7 +44,7 @@ export default function ItemDiv({ item }) {
                         if (!v) return;
                         if (k === "Passive" || k === "Active") {
                             return (
-                                <li key={i}>
+                                <li className='container d-flex' key={i}>
                                     <span className="dropdown-item-text" style={{ color: "rgb(186, 190, 195)" }}
                                     >{k}: {v}</span>
                                 </li>

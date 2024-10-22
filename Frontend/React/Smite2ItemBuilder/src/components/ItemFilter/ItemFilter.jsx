@@ -13,7 +13,8 @@ export default function ItemFilter({ changeFilter }) {
             { imgFileName: "S2_Stat_AttackSpeed.png", fieldName: "Attack Speed" },
             { imgFileName: "S2_Stat_Lifesteal.png", fieldName: "Lifesteal" },
             { imgFileName: "S2_Stat_CriticalChance.png", fieldName: "Critical Chance" },
-            { imgFileName: "S2_Stat_MagicalPen.png", fieldName: "Penetration" },
+            { imgFileName: "S2_Stat_PhysicalPenetration.png", fieldName: "Physical Penetration" },
+            { imgFileName: "S2_Stat_MagicalPenetration.png", fieldName: "Magical Penetration" },
         ],
         [
             { imgFileName: "S2_Stat_PhysicalProtection.png", fieldName: "Physical Protection" },

@@ -64,7 +64,7 @@ def SaveItemInDB(index, itemObj):
 def GetItems():
     index = -1
     for items in category:
-        if(index == -1): 
+        if(index >= 1): 
             for item in items:
                 itemProps = item.contents[1].find_all("li")
                 itemPropsText = [unicodedata.normalize("NFKD", prop.text) for prop in itemProps]
@@ -80,8 +80,8 @@ def GetItems():
                     setattr(itemObj, prop[0], prop[1])
                 print(vars(itemObj))
 
-                # SaveItemInDB(index, itemObj)
+                SaveItemInDB(index, itemObj)
         index += 1
-# GetItems()
+GetItems()
 
 print("true" if True else "false")

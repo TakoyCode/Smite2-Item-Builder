@@ -6,7 +6,10 @@ export default function ItemInfo({ item }) {
 
     const itemEntry = Object.entries(item);
     const noShowProps = ["Name", "Id", "Tier", "Img", "Gold", "Passive", "Active"];
-    const showPropsInPercent = ["Attack Speed", "divfesteal", "Critical Chance", "Penetration"];
+    const showPropsInPercent = [
+        "Attack Speed", "divfesteal", "Critical Chance",
+        "Physical Penetration", "Magical Penetration", "Movement Speed"
+    ];
 
     return (
         <div className="container rounded" style={{ width: "40%", background: "rgb(19, 29, 41)" }}>

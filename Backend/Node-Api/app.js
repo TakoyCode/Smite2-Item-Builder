@@ -19,9 +19,10 @@ app.get('/api/items', (req, res) => {
     if (req.query.format) {
         // Get all items
         request.query(`SELECT Id, Name, Tier, Gold, Strength, Intelligence, AttackSpeed as 'Attack Speed', Lifesteal,
-                        CriticalChance as 'Critical Chance', Penetration, PhysicalProtection  as 'Physical Protection', 
-                        MagicalProtection as 'Magical Protection', MaxHealth as 'Max Health', HealthRegen as 'Health Regen', 
-                        MaxMana as 'Max Mana', ManaRegen as 'Mana Regen', CooldownRate as 'Cooldown Rate', Passive, Active, Img
+                        CriticalChance as 'Critical Chance', PhysicalPenetration  as 'Physical Penetration', MagicalPenetration  as 'Magical Penetration',
+                        PhysicalProtection  as 'Physical Protection', MagicalProtection as 'Magical Protection', MaxHealth as 'Max Health', 
+                        HealthRegen as 'Health Regen', MaxMana as 'Max Mana', ManaRegen as 'Mana Regen', CooldownRate as 'Cooldown Rate', 
+                        MovementSpeed as 'Movement Speed', Passive, Active, Img
                         FROM Items`,
             (error, result) => {
                 // Checks for errors
@@ -336,7 +337,8 @@ function ValidateItem(item) {
         AttackSpeed: Joi.number().allow(null),
         Lifesteal: Joi.number().allow(null),
         CriticalChance: Joi.number().allow(null),
-        Penetration: Joi.number().allow(null),
+        PhysicalPenetration: Joi.number().allow(null),
+        MagicalPenetration: Joi.number().allow(null),
         PhysicalProtection: Joi.number().allow(null),
         MagicalProtection: Joi.number().allow(null),
         MaxHealth: Joi.number().allow(null),
@@ -344,6 +346,7 @@ function ValidateItem(item) {
         MaxMana: Joi.number().allow(null),
         ManaRegen: Joi.number().allow(null),
         CooldownRate: Joi.number().allow(null),
+        MovementSpeed: Joi.number().allow(null),
         Passive: Joi.string().allow(null),
         Active: Joi.string().allow(null),
         Img: Joi.binary().allow(null),
