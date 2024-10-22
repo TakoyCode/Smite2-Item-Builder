@@ -1,5 +1,5 @@
 import { useLoaderData } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import ItemScrollMenu from "../components/ItemScrollMenu/ItemScrollMenu";
 import ItemFilter from "../components/ItemFilter/ItemFilter";
@@ -11,6 +11,11 @@ export default function ItemSelector() {
     const [items, setItems] = useState(useLoaderData());
     const [filteredItems, setFilteredItems] = useState(null);
     const [selectedItem, setSelectedItem] = useState(null);
+
+    useEffect(() => {
+        console.log(selectedItem)
+    }, [selectedItem])
+
 
     const HealingReductionItemNames = ["Ruinous Poison", "Brawler's Ruin", "Divine Ruin", "Ruinous Ankh"]
     function changeFilter(filterType) {
@@ -35,7 +40,7 @@ export default function ItemSelector() {
 
             <div className="d-flex mt-2 text-light">
                 <ItemFilter changeFilter={changeFilter} />
-                <ItemScrollMenu items={(filteredItems || items)} />
+                <ItemScrollMenu items={(filteredItems || items)} setSelectedItem={setSelectedItem} />
                 <ItemInfo item={selectedItem} />
             </div>
         </div>

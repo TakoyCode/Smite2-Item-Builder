@@ -1,9 +1,9 @@
 .Item-Tree {
-    background-color: blueviolet;
-    height: 50%;
+    height: 45%;
+    background: rgb(26, 40, 57);
 }
 
 .Item-Info {
-    background-color: teal;
-    height: 50%;
+    height: 45%;
+    background: rgb(26, 40, 57);
 }

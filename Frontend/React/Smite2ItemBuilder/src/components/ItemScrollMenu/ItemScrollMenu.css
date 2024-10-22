@@ -18,9 +18,9 @@
 /* Handle on hover */
 .Item-Container::-webkit-scrollbar-thumb:hover {
     background: rgb(13, 19, 27);
-    cursor: grab;
+    /* cursor: grab; */
 }
 
-.Item-Container::-webkit-scrollbar-thumb:hover:active {
+/* .Item-Container::-webkit-scrollbar-thumb:hover:active {
     cursor: grabbing;
-}
+} */

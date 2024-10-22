@@ -49,14 +49,14 @@ export default function ItemFilter({ changeFilter }) {
             {
                 filterCategories.map((filterCategory, i) => {
                     return (
-                        <>
+                        <div key={i}>
                             {
                                 i != 0 ? <hr /> : ""
                             }
                             {
                                 MapFilterCategory(filterCategory)
                             }
-                        </>
+                        </div>
                     );
                 })
             }
