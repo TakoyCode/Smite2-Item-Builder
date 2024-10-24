@@ -7,3 +7,32 @@
     height: 45%;
     background: rgb(26, 40, 57);
 }
+
+.btn {
+    background: rgb(26, 40, 57);
+    color: rgb(186, 190, 195);
+    border: 2px solid rgb(224, 175, 100);
+}
+
+.btn:hover,
+.btn:hover:active {
+    color: rgb(186, 190, 195);
+    border: 2px solid rgb(224, 175, 100);
+    opacity: 0.85;
+}
+
+.btn:hover:active {
+    border: 2px solid hsla(36, 67%, 64%, 0.6);
+}
+
+.btn-add,
+.btn-add:hover,
+.btn-add:hover:active {
+    background: rgb(18, 82, 42);
+}
+
+.btn-remove,
+.btn-remove:hover,
+.btn-remove:hover:active {
+    background: rgb(148, 26, 36);
+}

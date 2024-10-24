@@ -1,6 +1,6 @@
 import Item from "../Item/Item";
 import "./ItemScrollMenu.css"
-
+//  maxHeight: 640
 export default function ItemScrollMenu({ items = [], setSelectedItem }) {
     return (
         <div className={"container rounded overflow-auto Item-Container"}
@@ -12,6 +12,6 @@ export default function ItemScrollMenu({ items = [], setSelectedItem }) {
                     })
                 }
             </div>
-        </div >
+        </div>
     );
 }
