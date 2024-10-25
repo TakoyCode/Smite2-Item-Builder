@@ -31,9 +31,12 @@ class Obj() : pass
 def FormatItemProp(prop):
     if("Item is automatically consumed" in prop):
         return ["Active", prop]
-
+    
     if(": " in prop):
         return prop.split(": ", 1)
+    
+    if(" -" in prop):
+        return prop.split(" -", 1)
     
     if("g" in prop[-1:]):
         goldProp = ["Gold"] + [prop[:-1]]
@@ -53,14 +56,18 @@ def SaveItemInDB(index, itemObj):
     headers = {'content-type': 'application/json'}
     if(index == -1):
         req = requests.post('http://localhost:3000/api/relics', headers=headers, json=itemObj.__dict__)
-
+        
     if(index == 0):
         req = requests.post('http://localhost:3000/api/consumables', headers=headers, json=itemObj.__dict__)
 
     if(index >= 1):
         req = requests.post('http://localhost:3000/api/items', headers=headers, json=itemObj.__dict__)
-    # print(req.content)
 
+    if(req.ok is False): 
+        print(itemObj.Name + " was not added to the db " + "status: " + str ( req.status_code ))
+    else: 
+        print(itemObj.Name + " is successfully added to the db"+ "status: " + str ( req.status_code ))
+ 
 def GetItems():
     index = -1
     for items in category:
@@ -78,10 +85,8 @@ def GetItems():
                 itemObj = Obj()
                 for prop in ItemWithFormatedProps:
                     setattr(itemObj, prop[0], prop[1])
-                print(vars(itemObj))
+                # print(vars(itemObj))
 
                 SaveItemInDB(index, itemObj)
         index += 1
 GetItems()
-
-print("true" if True else "false")
