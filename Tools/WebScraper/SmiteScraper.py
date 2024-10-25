@@ -32,6 +32,9 @@ def FormatItemProp(prop):
     if("Item is automatically consumed" in prop):
         return ["Active", prop]
     
+    if("Upgrades your Ward slot to a Sentry Ward with" in prop):
+        return ["Active", prop]
+
     if(": " in prop):
         return prop.split(": ", 1)
     
@@ -65,13 +68,13 @@ def SaveItemInDB(index, itemObj):
 
     if(req.ok is False): 
         print(itemObj.Name + " was not added to the db " + "status: " + str ( req.status_code ))
-    else: 
-        print(itemObj.Name + " is successfully added to the db"+ "status: " + str ( req.status_code ))
+    # else: 
+    #     print(itemObj.Name + " is successfully added to the db"+ "status: " + str ( req.status_code ))
  
 def GetItems():
     index = -1
     for items in category:
-        if(index >= 1): 
+        if(True or index >= 1): 
             for item in items:
                 itemProps = item.contents[1].find_all("li")
                 itemPropsText = [unicodedata.normalize("NFKD", prop.text) for prop in itemProps]
@@ -89,4 +92,5 @@ def GetItems():
 
                 SaveItemInDB(index, itemObj)
         index += 1
+    print("Done Adding Items to DB")
 GetItems()
