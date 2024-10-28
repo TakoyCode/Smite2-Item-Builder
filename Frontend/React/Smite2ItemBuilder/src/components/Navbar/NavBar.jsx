@@ -21,7 +21,7 @@ function NavBar() {
     ];
 
     return (
-        <div className="container mt-4">
+        <div className="container my-4">
             <nav className="navbar navbar-expand rounded-4 navbar-background">
                 <div className="container-fluid fs-5 navbar-nav px-2">
                     <Link className="navbar-brand" to="/" onClick={(e) => setCurrentLink(e.target.parentNode.attributes.href.value)} >

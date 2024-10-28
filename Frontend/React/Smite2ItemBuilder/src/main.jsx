@@ -21,6 +21,13 @@ const router = createBrowserRouter([
       {
         path: "Item-Builder",
         element: <ItemBuilder />,
+        children: [
+          {
+            path: "Add-Item",
+            element: <ShowingItemsShop />,
+            loader: itemLoader,
+          },
+        ]
       },
       {
         path: "Items",

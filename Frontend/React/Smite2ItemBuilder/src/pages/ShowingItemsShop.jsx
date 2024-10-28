@@ -35,7 +35,7 @@ export default function ItemSelector() {
     }
 
     return (
-        <div className="container my-4 py-2 rounded" style={{ background: "rgb(23,35,49)", minHeight: 650 }}>
+        <div className="container mb-4 py-2 rounded" style={{ background: "rgb(23,35,49)", minHeight: 650 }}>
             {/* <RoleFilter /> */}
             <div className="d-flex mt-2 text-light">
                 <ItemFilter changeFilter={changeFilter} />

@@ -12,7 +12,7 @@ export default function ItemScrollMenu({ items = [], setSelectedItem }) {
             <div className="d-flex flex-wrap gap-4 mt-2">
                 {
                     items.map((item, i) => {
-                        return <Item key={i} item={item} onClickFunction={null} />
+                        return <Item key={i} item={item} onClickFunction={() => handleSetSelectedItem(item)} />
                     })
                 }
             </div>
