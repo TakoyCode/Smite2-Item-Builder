@@ -1,8 +1,12 @@
+import { useOutletContext } from "react-router-dom";
 import ItemInfoPlaceholder from "./ItemInfoPlaceholder";
 import "./ItemInfo.css"
 
 export default function ItemInfo({ item }) {
     if (item === undefined || item === null) return <ItemInfoPlaceholder />;
+
+    const [build, setBuild] = useOutletContext();
+    console.log(build)
 
     const itemEntry = Object.entries(item);
     const noShowProps = ["Name", "Id", "Tier", "Img", "Gold", "Passive", "Active"];
@@ -10,6 +14,14 @@ export default function ItemInfo({ item }) {
         "Attack Speed", "Lifesteal", "Critical Chance",
         "Physical Penetration", "Magical Penetration", "Movement Speed"
     ];
+
+    function addItemToBuild() {
+        setBuild([...build, item])
+    }
+
+    function removeItemFromBuild() {
+
+    }
 
     return (
         <div className="container rounded d-flex flex-column" style={{ width: "40%", background: "rgb(19, 29, 41)", position: "relative" }}>
@@ -49,8 +61,8 @@ export default function ItemInfo({ item }) {
                 </div>
             </div>
             <div className="d-flex  justify-content-between">
-                <button className="btn btn-add" style={{ width: "48%" }} disabled={false}>Add</button>
-                <button className="btn btn-remove" style={{ width: "48%" }} disabled={false}>Remove</button>
+                <button className="btn btn-add" style={{ width: "48%" }} disabled={false} onClick={addItemToBuild}>Add</button>
+                <button className="btn btn-remove" style={{ width: "48%" }} disabled={false} onClick={removeItemFromBuild}>Remove</button>
             </div>
         </div >
     )

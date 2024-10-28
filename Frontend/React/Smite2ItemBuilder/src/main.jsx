@@ -6,7 +6,8 @@ import App, { loader as itemLoader } from './App.jsx'
 import ErrorPage from './pages/ErrorPage.jsx';
 import ItemBuilder from './pages/ItemBuilder.jsx';
 import ShowingItemsGrid from "./pages/ShowingItemsGrid.jsx";
-import ShowingItemsShop from "./pages/ShowingItemsShop.jsx";
+import ItemSelector from "./pages/ItemSelector.jsx";
+import BuildInfo from './pages/BuildInfo.jsx';
 
 import './index.css'
 import './fonts/Outfit.css'
@@ -23,8 +24,13 @@ const router = createBrowserRouter([
         element: <ItemBuilder />,
         children: [
           {
+            path: "/Item-Builder/",
+            element: <BuildInfo />,
+            loader: itemLoader,
+          },
+          {
             path: "Add-Item",
-            element: <ShowingItemsShop />,
+            element: <ItemSelector />,
             loader: itemLoader,
           },
         ]
@@ -36,7 +42,7 @@ const router = createBrowserRouter([
       },
       {
         path: "Shop",
-        element: <ShowingItemsShop />,
+        element: <ItemSelector />,
         loader: itemLoader,
       },
     ],
