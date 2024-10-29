@@ -1,4 +1,4 @@
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useParams, useOutletContext } from "react-router-dom";
 import { useState } from "react";
 
 import ItemScrollMenu from "../components/ItemScrollMenu/ItemScrollMenu";
@@ -10,7 +10,9 @@ import ItemInfo from "../components/ItemInfo/ItemInfo";
 export default function ItemSelector() {
     const [items, setItems] = useState(useLoaderData());
     const [filteredItems, setFilteredItems] = useState(null);
-    const [selectedItem, setSelectedItem] = useState(null);
+
+    const [build, setBuild] = useOutletContext();
+    const [selectedItem, setSelectedItem] = useState(build[useParams().buildIndex]);
 
     const HealingReductionItemNames = ["Ruinous Poison", "Brawler's Ruin", "Divine Ruin", "Ruinous Ankh"]
     function changeFilter(filterType) {

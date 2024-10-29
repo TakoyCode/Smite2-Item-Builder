@@ -20,28 +20,28 @@ const router = createBrowserRouter([
     // loader: itemLoader,
     children: [
       {
-        path: "Item-Builder",
+        path: "itemBuilder",
         element: <ItemBuilder />,
         children: [
           {
-            path: "/Item-Builder/",
+            path: "/itemBuilder/",
             element: <BuildInfo />,
             loader: itemLoader,
           },
           {
-            path: "Add-Item",
+            path: "addItem/:buildIndex",
             element: <ItemSelector />,
             loader: itemLoader,
           },
         ]
       },
       {
-        path: "Items",
+        path: "items",
         element: <ShowingItemsGrid />,
         loader: itemLoader,
       },
       {
-        path: "Shop",
+        path: "shop",
         element: <ItemSelector />,
         loader: itemLoader,
       },

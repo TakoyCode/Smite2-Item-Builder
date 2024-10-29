@@ -11,15 +11,15 @@ export default function BuildInfo() {
 
     return (
         <div>
-            <div className="container bg-success">
+            <div className="container" style={{ backgroundColor: "rgb(23, 35, 49)" }}>
                 <h1 className="text-center">ITEM-BUILDER</h1>
 
-                {
+                {/* {
                     build.map((item, i) => <div key={i}>{item.Name}</div>)
-                }
+                } */}
 
                 <div className="d-flex justify-content-center" width={200}>
-                    <BuildPreview />
+                    <BuildPreview build={build} />
                     <Statistics />
                 </div>
 

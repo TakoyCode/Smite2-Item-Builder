@@ -1,4 +1,4 @@
-import { useOutletContext } from "react-router-dom";
+import { Link, useOutletContext } from "react-router-dom";
 import ItemInfoPlaceholder from "./ItemInfoPlaceholder";
 import "./ItemInfo.css"
 
@@ -6,7 +6,6 @@ export default function ItemInfo({ item }) {
     if (item === undefined || item === null) return <ItemInfoPlaceholder />;
 
     const [build, setBuild] = useOutletContext();
-    console.log(build)
 
     const itemEntry = Object.entries(item);
     const noShowProps = ["Name", "Id", "Tier", "Img", "Gold", "Passive", "Active"];
@@ -16,6 +15,7 @@ export default function ItemInfo({ item }) {
     ];
 
     function addItemToBuild() {
+        if (build.length >= 6) return;
         setBuild([...build, item])
     }
 
@@ -35,7 +35,7 @@ export default function ItemInfo({ item }) {
                             if (noShowProps.includes(k)) return;
                             return (
                                 <div className="mt-1" key={i}>
-                                    <img src={`./src/assets/StatIcons/S2_Stat_${k.replaceAll(" ", "")}.png`} alt="" className="me-1" style={{ height: 25 }} />
+                                    <img src={`/StatIcons/S2_Stat_${k.replaceAll(" ", "")}.png`} alt="" className="me-1" style={{ height: 25 }} />
                                     <span style={{ color: "rgb(186, 190, 195)" }}
                                     >{v}{showPropsInPercent.includes(k) ? "%" : ""} {k}</span>
                                 </div>
@@ -51,7 +51,7 @@ export default function ItemInfo({ item }) {
                             if (k === "Passive" || k === "Active") {
                                 return (
                                     <div key={i}>
-                                        <img src={`./src/assets/StatIcons/S2_Stat_${k.replaceAll(" ", "")}.png`} alt="" className="me-1" style={{ height: 25 }} />
+                                        <img src={`/StatIcons/S2_Stat_${k.replaceAll(" ", "")}.png`} alt="" className="me-1" style={{ height: 25 }} />
                                         <span style={{ color: "rgb(186, 190, 195)" }}>{k}: {v}</span>
                                     </div>
                                 )
@@ -61,8 +61,8 @@ export default function ItemInfo({ item }) {
                 </div>
             </div>
             <div className="d-flex  justify-content-between">
-                <button className="btn btn-add" style={{ width: "48%" }} disabled={false} onClick={addItemToBuild}>Add</button>
-                <button className="btn btn-remove" style={{ width: "48%" }} disabled={false} onClick={removeItemFromBuild}>Remove</button>
+                <Link className="btn btn-add" style={{ width: "48%" }} disabled={false} to=".." onClick={addItemToBuild}>Add</Link>
+                <Link className="btn btn-remove" style={{ width: "48%" }} disabled={false} to=".." onClick={removeItemFromBuild}>Remove</Link>
             </div>
         </div >
     )

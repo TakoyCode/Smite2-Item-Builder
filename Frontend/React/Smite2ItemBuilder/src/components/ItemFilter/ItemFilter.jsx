@@ -38,7 +38,7 @@ export default function ItemFilter({ changeFilter }) {
         return filterCategory.map((filterField, i) => {
             return (
                 <div key={i} onClick={(e) => changeFilter(filterField.fieldName)}>
-                    <img src={`./src/assets/StatIcons/${filterField.imgFileName}`} alt={filterField.fieldName + " Stat Image"} />
+                    <img src={`/StatIcons/${filterField.imgFileName}`} alt={filterField.fieldName + " Stat Image"} />
                     {filterField.fieldName}
                 </div>
             );
