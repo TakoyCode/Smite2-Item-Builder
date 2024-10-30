@@ -23,7 +23,7 @@ export default function ItemInfo({ item }) {
     }
 
     return (
-        <div className="container rounded d-flex flex-column" style={{ width: "40%", background: "rgb(19, 29, 41)", position: "relative" }}>
+        <div className="container rounded d-flex flex-column" style={{ width: "40%", background: "rgb(19, 29, 41)" }}>
             <div className="Item-Tree text-center rounded mt-4">Item Tree Showcase</div>
             <div className="Item-Info rounded mt-3 p-4">
                 <h3 className="fw-bold" style={{ color: "rgb(186, 190, 195)" }}>{item.Name}</h3>
@@ -59,7 +59,7 @@ export default function ItemInfo({ item }) {
                     }
                 </div>
             </div>
-            <div className="d-flex  justify-content-between">
+            <div className="d-flex justify-content-between">
                 <Link className="btn btn-add" style={{ width: "48%" }} disabled={false} to=".." onClick={addItemToBuild}>Add</Link>
                 <Link className="btn btn-remove" style={{ width: "48%" }} disabled={false} to=".." onClick={removeItemFromBuild}>Remove</Link>
             </div>
