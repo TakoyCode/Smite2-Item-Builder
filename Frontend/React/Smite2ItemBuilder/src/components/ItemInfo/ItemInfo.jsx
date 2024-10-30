@@ -1,11 +1,11 @@
-import { Link, useOutletContext } from "react-router-dom";
+import { Link, useOutletContext, useParams } from "react-router-dom";
 import ItemInfoPlaceholder from "./ItemInfoPlaceholder";
 import "./ItemInfo.css"
 
 export default function ItemInfo({ item }) {
     if (item === undefined || item === null) return <ItemInfoPlaceholder />;
 
-    const [build, setBuild] = useOutletContext();
+    const [build, setBuild, updateBuild] = useOutletContext();
 
     const itemEntry = Object.entries(item);
     const noShowProps = ["Name", "Id", "Tier", "Img", "Gold", "Passive", "Active"];
@@ -14,12 +14,27 @@ export default function ItemInfo({ item }) {
         "Physical Penetration", "Magical Penetration", "Movement Speed"
     ];
 
+    const buildItemSlot = useParams().buildIndex;
+    const isItem3InBuild = IsTier3ItemInBuild();
+
     function addItemToBuild() {
-        setBuild()
+        updateBuild(buildItemSlot, item);
     }
 
     function removeItemFromBuild() {
-        return;
+        updateBuild(buildItemSlot, null);
+    }
+
+    function IsTier3ItemInBuild() {
+        if (item.Tier != 3) return false;
+        let response = false;
+
+        build.forEach((value, key) => {
+            if (value === item) response = true;
+        });
+
+        console.log(response)
+        return response;
     }
 
     return (
@@ -60,8 +75,9 @@ export default function ItemInfo({ item }) {
                 </div>
             </div>
             <div className="d-flex justify-content-between">
-                <Link className="btn btn-add" style={{ width: "48%" }} disabled={false} to=".." onClick={addItemToBuild}>Add</Link>
-                <Link className="btn btn-remove" style={{ width: "48%" }} disabled={false} to=".." onClick={removeItemFromBuild}>Remove</Link>
+                <Link className={`btn btn-add ${IsTier3ItemInBuild() || build.get(buildItemSlot) === item ? "disabled" : ""}`}
+                    style={{ width: "48%" }} to=".." onClick={addItemToBuild}>Add</Link>
+                <Link className="btn btn-remove" style={{ width: "48%" }} to=".." onClick={removeItemFromBuild}>Remove</Link>
             </div>
         </div >
     )

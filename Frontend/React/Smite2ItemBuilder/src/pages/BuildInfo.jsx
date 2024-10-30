@@ -4,18 +4,13 @@ import { useOutletContext } from "react-router-dom";
 
 
 export default function BuildInfo() {
-    const [build, setBuild] = useOutletContext();
+    const [build, setBuild, updateBuild] = useOutletContext();
 
     const handleSaveBuild = () => { return; }
     const handleClearBuild = () => {
-        setBuild(new Map([
-            ["item1", null],
-            ["item2", null],
-            ["item3", null],
-            ["item4", null],
-            ["item5", null],
-            ["item6", null],
-        ]));
+        build.forEach((value, key) => {
+            updateBuild(key, null)
+        });
     }
 
     return (

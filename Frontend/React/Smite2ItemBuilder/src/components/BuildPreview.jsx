@@ -11,8 +11,9 @@ export default function BuildPreview({ build }) {
                     <Item item={value} />
                 </Link>
                 :
-                <Link key={key} style={{ width: 75, height: 75, background: "rgb(23, 35, 49)", outline: "2px solid rgb(221, 161, 70)" }}
-                    to={`addItem/${key}`}></Link>
+                <Link key={key} to={`addItem/${key}`} style={{ height: 99 }}>
+                    <div style={{ width: 75, height: 75, background: "rgb(23, 35, 49)", outline: "2px solid rgb(221, 161, 70)" }}></div>
+                </Link >
             items.push(item);
         })
         return items;
