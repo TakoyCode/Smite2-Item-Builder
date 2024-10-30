@@ -3,19 +3,19 @@ import Item from "./Item/Item.jsx"
 import { Link } from "react-router-dom";
 
 export default function BuildPreview({ build }) {
-
-    function createFillerItems() {
-        let fillerItems = [];
-
-        for (let index = build.length; index < 6; index++) {
-
-            fillerItems.push(
-                <Link key={index} style={{ width: 75, height: 75, background: "rgb(23, 35, 49)", outline: "2px solid rgb(221, 161, 70)" }}
-                    to={`addItem/${index}`}></Link>
-            )
-        }
-
-        return fillerItems;
+    function createClickableItems() {
+        let items = [];
+        build.forEach((value, key) => {
+            const item = value != null ?
+                <Link key={key} to={`addItem/${key}`} style={{ textDecoration: "none" }}>
+                    <Item item={value} />
+                </Link>
+                :
+                <Link key={key} style={{ width: 75, height: 75, background: "rgb(23, 35, 49)", outline: "2px solid rgb(221, 161, 70)" }}
+                    to={`addItem/${key}`}></Link>
+            items.push(item);
+        })
+        return items;
     }
 
     return (
@@ -38,14 +38,7 @@ export default function BuildPreview({ build }) {
             </div>
             <div className="d-flex flex-wrap gap-4" style={{ width: 300 }}>
                 {
-                    build.map((item, i) => (
-                        <Link key={i} to={`addItem/${i}`} style={{ textDecoration: "none" }}>
-                            <Item item={item} />
-                        </Link>
-                    ))
-                }
-                {
-                    createFillerItems()
+                    createClickableItems()
                 }
             </div>
             {/* <ItemCategory CategoryName="Damage" itemCount={6} />

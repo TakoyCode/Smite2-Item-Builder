@@ -7,7 +7,16 @@ export default function BuildInfo() {
     const [build, setBuild] = useOutletContext();
 
     const handleSaveBuild = () => { return; }
-    const handleClearBuild = () => { setBuild([]); }
+    const handleClearBuild = () => {
+        setBuild(new Map([
+            ["item1", null],
+            ["item2", null],
+            ["item3", null],
+            ["item4", null],
+            ["item5", null],
+            ["item6", null],
+        ]));
+    }
 
     return (
         <div>

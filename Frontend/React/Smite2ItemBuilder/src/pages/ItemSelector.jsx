@@ -12,7 +12,9 @@ export default function ItemSelector() {
     const [filteredItems, setFilteredItems] = useState(null);
 
     const [build, setBuild] = useOutletContext();
-    const [selectedItem, setSelectedItem] = useState(build[useParams().buildIndex]);
+    const [selectedItem, setSelectedItem] = useState(build.get(useParams().buildIndex));
+
+    console.log(build.get(useParams().buildIndex))
 
     const HealingReductionItemNames = ["Ruinous Poison", "Brawler's Ruin", "Divine Ruin", "Ruinous Ankh"]
     function changeFilter(filterType) {

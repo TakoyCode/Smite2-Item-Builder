@@ -15,12 +15,11 @@ export default function ItemInfo({ item }) {
     ];
 
     function addItemToBuild() {
-        if (build.length >= 6) return;
-        setBuild([...build, item])
+        setBuild()
     }
 
     function removeItemFromBuild() {
-
+        return;
     }
 
     return (
