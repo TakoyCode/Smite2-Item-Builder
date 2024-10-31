@@ -4,7 +4,7 @@ import { useOutletContext } from "react-router-dom";
 
 
 export default function BuildInfo() {
-    const [build, setBuild, updateBuild] = useOutletContext();
+    const [build, updateBuild] = useOutletContext();
 
     const handleSaveBuild = () => { return; }
     const handleClearBuild = () => {

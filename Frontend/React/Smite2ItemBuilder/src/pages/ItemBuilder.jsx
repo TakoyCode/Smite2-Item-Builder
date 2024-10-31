@@ -12,12 +12,13 @@ export default function ItemBuilder() {
         ["item6", null],
     ]));
 
+    const [selectedBuildSlot, setSelectedBuildSlot] = useState(null);
+
     const updateBuild = (key, value) => {
         setBuild(new Map(build.set(key, value)));
     }
 
-
     return (
-        <Outlet context={[build, setBuild, updateBuild]} />
+        <Outlet context={[build, updateBuild, selectedBuildSlot, setSelectedBuildSlot]} />
     );
 }

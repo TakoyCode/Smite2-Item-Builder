@@ -5,7 +5,7 @@ import "./ItemInfo.css"
 export default function ItemInfo({ item }) {
     if (item === undefined || item === null) return <ItemInfoPlaceholder />;
 
-    const [build, setBuild, updateBuild] = useOutletContext();
+    const [build, updateBuild, selectedBuildSlot, setSelectedBuildSlot] = useOutletContext();
 
     const itemEntry = Object.entries(item);
     const noShowProps = ["Name", "Id", "Tier", "Img", "Gold", "Passive", "Active"];

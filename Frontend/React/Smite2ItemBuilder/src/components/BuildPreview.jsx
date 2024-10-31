@@ -1,10 +1,13 @@
 import ItemCategory from "./ItemCategory";
 import Item from "./Item/Item.jsx"
-import { Link } from "react-router-dom";
+import { Link, useOutletContext } from "react-router-dom";
 
 export default function BuildPreview({ build }) {
+    // const [selectedItem, setSelectedItem] = useState(build.get(selectedBuildSlot));
+
     function createClickableItems() {
         let items = [];
+
         build.forEach((value, key) => {
             const item = value != null ?
                 <Link key={key} to={`addItem/${key}`} style={{ textDecoration: "none" }}>
