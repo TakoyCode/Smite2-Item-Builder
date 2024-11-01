@@ -14,18 +14,20 @@ export default function ItemInfo({ item }) {
         "Physical Penetration", "Magical Penetration", "Movement Speed"
     ];
 
-    const buildItemSlot = useParams().buildIndex;
-    const isItem3InBuild = IsTier3ItemInBuild();
-
     function addItemToBuild() {
-        updateBuild(buildItemSlot, item);
+        updateBuild(selectedBuildSlot, item);
     }
 
     function removeItemFromBuild() {
-        updateBuild(buildItemSlot, null);
+        updateBuild(selectedBuildSlot, null);
     }
 
-    function IsTier3ItemInBuild() {
+    function isItemInBuildSlot() {
+        if (build.get(selectedBuildSlot) === item) return true;
+        return false;
+    }
+
+    function canAddItemToBuild() {
         if (item.Tier != 3) return false;
         let response = false;
 
@@ -33,7 +35,6 @@ export default function ItemInfo({ item }) {
             if (value === item) response = true;
         });
 
-        console.log(response)
         return response;
     }
 
@@ -75,9 +76,10 @@ export default function ItemInfo({ item }) {
                 </div>
             </div>
             <div className="d-flex justify-content-between">
-                <Link className={`btn btn-add ${IsTier3ItemInBuild() || build.get(buildItemSlot) === item ? "disabled" : ""}`}
+                <Link className={`btn btn-add ${canAddItemToBuild() || build.get(selectedBuildSlot) === item ? "disabled" : ""}`}
                     style={{ width: "48%" }} to=".." onClick={addItemToBuild}>Add</Link>
-                <Link className="btn btn-remove" style={{ width: "48%" }} to=".." onClick={removeItemFromBuild}>Remove</Link>
+                <Link className={`btn btn-remove ${isItemInBuildSlot() ? "" : "disabled"}`}
+                    style={{ width: "48%" }} to=".." onClick={removeItemFromBuild}>Remove</Link>
             </div>
         </div >
     )

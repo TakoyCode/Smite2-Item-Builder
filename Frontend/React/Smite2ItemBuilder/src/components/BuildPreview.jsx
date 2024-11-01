@@ -2,19 +2,24 @@ import ItemCategory from "./ItemCategory";
 import Item from "./Item/Item.jsx"
 import { Link, useOutletContext } from "react-router-dom";
 
-export default function BuildPreview({ build }) {
-    // const [selectedItem, setSelectedItem] = useState(build.get(selectedBuildSlot));
+export default function BuildPreview(props) {
+    const [build, updateBuild, selectedBuildSlot, setSelectedBuildSlot] = useOutletContext();
+
+    function changeSelectedBuildSlot(buildSlot) {
+        console.log(buildSlot)
+        setSelectedBuildSlot(buildSlot);
+    }
 
     function createClickableItems() {
         let items = [];
 
         build.forEach((value, key) => {
             const item = value != null ?
-                <Link key={key} to={`addItem/${key}`} style={{ textDecoration: "none" }}>
+                <Link key={key} to={`addItem`} style={{ textDecoration: "none" }} onClick={() => changeSelectedBuildSlot(key)}>
                     <Item item={value} />
                 </Link>
                 :
-                <Link key={key} to={`addItem/${key}`} style={{ height: 99 }}>
+                <Link key={key} to={`addItem`} style={{ height: 99 }} onClick={() => changeSelectedBuildSlot(key)}>
                     <div style={{ width: 75, height: 75, background: "rgb(23, 35, 49)", outline: "2px solid rgb(221, 161, 70)" }}></div>
                 </Link >
             items.push(item);

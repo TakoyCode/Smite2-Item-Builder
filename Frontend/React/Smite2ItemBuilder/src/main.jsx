@@ -29,7 +29,7 @@ const router = createBrowserRouter([
             loader: itemLoader,
           },
           {
-            path: "addItem/:buildIndex",
+            path: "addItem",
             element: <ItemSelector />,
             loader: itemLoader,
           },
