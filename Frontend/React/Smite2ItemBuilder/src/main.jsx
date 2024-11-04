@@ -40,11 +40,6 @@ const router = createBrowserRouter([
         element: <ShowingItemsGrid />,
         loader: itemLoader,
       },
-      {
-        path: "shop",
-        element: <ItemSelector />,
-        loader: itemLoader,
-      },
     ],
   },
 ]);

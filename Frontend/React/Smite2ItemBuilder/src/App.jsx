@@ -5,8 +5,7 @@ let items = null;
 export async function loader() {
   if (items) return items;
   items = await GetItems();
-  // console.log("New loader fetch")
-  // console.log(items)
+
   return items;
 }
 
@@ -33,6 +32,7 @@ async function GetItems() {
     console.error(error)
   }
 }
+
 
 export default function App() {
   // const [items, setItems] = useState([]);

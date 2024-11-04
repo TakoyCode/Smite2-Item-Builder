@@ -12,7 +12,7 @@ function NavBar() {
     const textLinks = [
         { href: "/", Text: "Gods" },
         { href: "/items", Text: "Items" },
-        { href: "/shop", Text: "Builds" },
+        { href: "/", Text: "Builds" },
         { href: "/itemBuilder", Text: "Item Builder" },
     ];
 

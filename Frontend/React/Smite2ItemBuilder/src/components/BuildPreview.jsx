@@ -2,11 +2,10 @@ import ItemCategory from "./ItemCategory";
 import Item from "./Item/Item.jsx"
 import { Link, useOutletContext } from "react-router-dom";
 
-export default function BuildPreview(props) {
+export default function BuildPreview() {
     const [build, updateBuild, selectedBuildSlot, setSelectedBuildSlot] = useOutletContext();
 
     function changeSelectedBuildSlot(buildSlot) {
-        console.log(buildSlot)
         setSelectedBuildSlot(buildSlot);
     }
 

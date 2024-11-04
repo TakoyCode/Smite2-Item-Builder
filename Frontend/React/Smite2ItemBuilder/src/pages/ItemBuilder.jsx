@@ -12,7 +12,7 @@ export default function ItemBuilder() {
         ["item6", null],
     ]));
 
-    const [selectedBuildSlot, setSelectedBuildSlot] = useState(null);
+    const [selectedBuildSlot, setSelectedBuildSlot] = useState("item1");
 
     const updateBuild = (key, value) => {
         setBuild(new Map(build.set(key, value)));

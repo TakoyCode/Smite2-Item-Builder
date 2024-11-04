@@ -44,6 +44,18 @@ app.get('/api/items', (req, res) => {
     }
 });
 
+app.get('/api/itemRecipes', (req, res) => {
+    const request = new sql.Request();
+    // Get all itemRecipes
+    request.query('select * from itemRecipes', (error, result) => {
+        // Checks for errors
+        if (error) return res.status(400).send(error.message);
+
+        // Sends back all itemRecipes
+        res.send(result.recordset);
+    });
+});
+
 app.get('/api/consumables', (req, res) => {
     const request = new sql.Request();
     // Get all consumables
