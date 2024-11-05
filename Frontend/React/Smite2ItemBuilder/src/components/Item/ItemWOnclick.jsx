@@ -1,6 +1,6 @@
 import "./Item.css"
 
-export default function ItemDiv({ item, onClickFunction }) {
+export default function ItemWOnclick({ item, onClickFunction }) {
     if (item === undefined) return;
     return (
         <div style={{ width: 75 }}>

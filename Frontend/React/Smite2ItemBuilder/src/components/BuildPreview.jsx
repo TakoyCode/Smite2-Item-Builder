@@ -1,5 +1,5 @@
 import ItemCategory from "./ItemCategory";
-import Item from "./Item/Item.jsx"
+import ItemWOnclick from "./Item/ItemWOnclick.jsx"
 import { Link, useOutletContext } from "react-router-dom";
 
 export default function BuildPreview() {
@@ -15,7 +15,7 @@ export default function BuildPreview() {
         build.forEach((value, key) => {
             const item = value != null ?
                 <Link key={key} to={`addItem`} style={{ textDecoration: "none" }} onClick={() => changeSelectedBuildSlot(key)}>
-                    <Item item={value} />
+                    <ItemWOnclick item={value} />
                 </Link>
                 :
                 <Link key={key} to={`addItem`} style={{ height: 99 }} onClick={() => changeSelectedBuildSlot(key)}>

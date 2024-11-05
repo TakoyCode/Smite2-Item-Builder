@@ -1,8 +1,10 @@
 import SelectedItemInfo from "./SelectedItemInfo";
 import ItemInfoButtons from "./ItemInfoButtons";
 import ItemTree from "./ItemTree";
+import { useEffect, useState } from "react";
 
-export default function ItemInfo({ item }) {
+
+export default function ItemInfo({ item, itemRecipes }) {
     const noShowProps = ["Name", "Id", "Tier", "Img", "Gold", "Passive", "Active"];
     const showPropsInPercent = [
         "Attack Speed", "Lifesteal", "Critical Chance",
@@ -11,7 +13,7 @@ export default function ItemInfo({ item }) {
 
     return (
         <div className="container rounded d-flex flex-column" style={{ width: "40%", background: "rgb(19, 29, 41)" }}>
-            <ItemTree item={item} />
+            <ItemTree item={item} itemRecipes={itemRecipes} />
             <SelectedItemInfo item={item} noShowProps={noShowProps} showPropsInPercent={showPropsInPercent} />
             <ItemInfoButtons item={item} />
         </div >

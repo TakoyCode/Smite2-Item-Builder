@@ -16,11 +16,12 @@ export default function ItemSelector() {
     const [selectedItem, setSelectedItem] = useState(build.get(selectedBuildSlot));
 
     useEffect(() => {
-        if (itemRecipes) return;
-
-        setItemsRecipes(GetItemRecipes());
+        async function handleSetItemRecipes() {
+            if (itemRecipes) return;
+            setItemsRecipes(await GetItemRecipes());
+        }
+        handleSetItemRecipes();
     }, [])
-
 
     async function GetItemRecipes() {
         try {
@@ -37,9 +38,6 @@ export default function ItemSelector() {
             console.error(error)
         }
     }
-
-    // console.log(items)
-    // console.log(itemRecipes)
 
     const HealingReductionItemNames = ["Ruinous Poison", "Brawler's Ruin", "Divine Ruin", "Ruinous Ankh"]
     function changeFilter(filterType) {
@@ -64,7 +62,7 @@ export default function ItemSelector() {
             <div className="d-flex mt-2 text-light">
                 <ItemFilter changeFilter={changeFilter} />
                 <ItemScrollMenu items={(filteredItems || items)} setSelectedItem={setSelectedItem} />
-                {selectedItem ? <ItemInfoPlaceholder /> : <ItemInfo item={selectedItem} />}
+                {selectedItem ? <ItemInfo item={selectedItem} itemRecipes={itemRecipes} /> : <ItemInfoPlaceholder />}
             </div>
         </div>
     );

@@ -18,14 +18,15 @@ export default function ItemInfoButtons({ item }) {
     }
 
     function canAddItemToBuild() {
-        if (item.Tier != 3) return false;
-        let response = false;
+        if (item.Tier === 3) {
+            let response = false;
 
-        build.forEach((value, key) => {
-            if (value === item) response = true;
-        });
-
-        return response;
+            build.forEach((value, key) => {
+                if (value === item) response = true;
+            });
+            return response;
+        }
+        return false;
     }
 
     return (
