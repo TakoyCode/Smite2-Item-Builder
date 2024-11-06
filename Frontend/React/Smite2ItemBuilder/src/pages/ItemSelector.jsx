@@ -23,9 +23,9 @@ export default function ItemSelector() {
         handleSetItemRecipes();
     }, [])
 
-    useEffect(() => {
-        console.log(build)
-    }, [build])
+    // useEffect(() => {
+    //     console.log(build)
+    // }, [build])
 
     async function GetItemRecipes() {
         try {
