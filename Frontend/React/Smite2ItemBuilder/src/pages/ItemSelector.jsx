@@ -23,6 +23,10 @@ export default function ItemSelector() {
         handleSetItemRecipes();
     }, [])
 
+    useEffect(() => {
+        console.log(build)
+    }, [build])
+
     async function GetItemRecipes() {
         try {
             const response = await fetch('http://localhost:3000/api/itemRecipes', {
