@@ -1,33 +1,25 @@
 import { useEffect, useState } from "react";
 import { useLoaderData } from "react-router-dom";
-import ItemWOnclick from "../Item/ItemWOnclick";
+import Item from "../Item/Item";
+// import ItemWOnclick from "../Item/ItemWOnclick";
 
 export default function ItemTree({ item, itemRecipes }) {
     const [items, setItems] = useState(useLoaderData());
     const [recipeItems, setRecipeItems] = useState([]);
-    const [itemTree, setItemTree] = useState([]);
-
-    // ["ItemMain", ["Component1", ["Component1.1"]], ["Component2"]]
-
-    // {
-    //     item: item...,
-    //     components: ["Component1", "Component2"],
-    // }
+    const [itemTree, setItemTree] = useState(null);
 
     useEffect(() => {
         const builtItemTree = buildItemTree(item.Id);
         setItemTree(builtItemTree);
     }, [item])
 
-    useEffect(() => console.log(drawItemTree(itemTree)), [itemTree])
+    // Helper function to find an item by it's id
+    const findItemById = (itemId) => items?.find(item => item.Id === itemId);
 
-    // Helper to find an item by ID
-    const findItemById = (id) => items.find(item => item.Id === id);
+    // Helper function to find the item recipe to an item via it's id
+    const findRecipeByMainItemId = (itemId) => itemRecipes?.find(itemRecipe => itemRecipe.MainItemId === itemId);
 
-    // Helper to find the recipe by MainItemId
-    const findRecipeByMainItemId = (id) => itemRecipes.find(recipe => recipe.MainItemId === id);
-
-    // Recursive function to build the tree
+    // Recursive function to help build the tree
     function buildItemTree(mainItemId) {
         const itemRecipe = findRecipeByMainItemId(mainItemId);
 
@@ -50,73 +42,71 @@ export default function ItemTree({ item, itemRecipes }) {
         return itemTree;
     }
 
-    function drawItemTree(tree) {
-        const mainItemId = tree.MainItemId;
-        const mainItem = findItemById(mainItemId);
+    // NOT WORKING CODE
+    // function drawItemTreeRecursive(tree) {
+    //     // Getting the main item from the tree object
+    //     const mainItem = findItemById(tree.MainItemId);
 
-        // Base case
-        if (!tree.components) {
-            return <ItemWOnclick item={mainItem} onClickFunction={null} />;
+    //     // Base case
+    //     if (!tree.components || tree.components.length === 0) {
+    //         return <ItemWOnclick item={mainItem} onClickFunction={null} />;
+    //     }
+
+    //     // Recursive case
+    //     const itemTree =
+    //         <div className="d-flex flex-column align-items-center justify-content-center" style={{ width: "100%" }}>
+    //             <ItemWOnclick item={mainItem} onClickFunction={null} />
+    //             <div className="d-flex me-2">
+    //                 {
+    //                     tree.components.map((component, index) => (
+    //                         drawItemTree(component)
+    //                     ))
+    //                 }
+    //             </div>
+    //         </div>
+
+    //     // return finished item tree
+    //     return itemTree;
+    // }
+
+    function drawUpViaComponentId(itemId) {
+        const mainItem = findItemById(itemId);
+        const itemRecipe = findRecipeByMainItemId(itemId);
+        if (!itemRecipe || !itemRecipe.Component1Id && !itemRecipe.Component2Id) {
+            return (
+                <div className="d-flex flex-column align-items-center">
+                    <Item item={mainItem} />
+                    <div className="d-flex gap-3 justify-content-center" style={{ width: 166 }}>
+                    </div>
+                </div>
+            )
         }
+        else {
+            const componentItem1 = itemRecipe.Component1Id ? findItemById(itemRecipe.Component1Id) : null;
+            const componentItem2 = itemRecipe.Component2Id ? findItemById(itemRecipe.Component2Id) : null;
 
-        // Recursive case
-        const itemTree = [<ItemWOnclick item={mainItem} onClickFunction={null} />];
-
-        // let component1 = "";
-        // let component2 = "";
-        if (tree.components[0]) {
-            // component1 = drawItemTree(tree.components[0]);
-            itemTree.push(drawItemTree(tree.components[0]));
+            return (
+                <div className="d-flex flex-column align-items-center">
+                    <Item item={mainItem} />
+                    <div className="d-flex gap-3 justify-content-center" style={{ width: 166 }}>
+                        {componentItem1 ? <Item item={componentItem1} /> : <></>}
+                        {componentItem2 ? <Item item={componentItem2} /> : <></>}
+                    </div>
+                </div>
+            );
         }
-        if (tree.components[1]) {
-            // component2 = drawItemTree(tree.components[1]);
-            itemTree.push(drawItemTree(tree.components[1]));
-        }
-
-        // const itemTree = [
-        //     <div className="d-flex justify-content-evenly">
-        //         {component1}
-        //         {component2}
-        //     </div>
-        // ]
-
-        // return finished item tree
-        return itemTree;
     }
 
     return (
-        <div className="Item-Tree text-center rounded mt-4" style={{ height: "45%", background: " rgb(26, 40, 57)" }}>
-            <div className="d-flex flex-column align-items-center mt-3">
-                {/* <div className="d-flex justify-content-evenly">
-                    <ItemWOnclick item={item} onClickFunction={null} />
+        <div className="d-flex flex-column justify-content-center rounded mt-3" style={{ height: "45%", background: " rgb(26, 40, 57)" }}>
+            <div className="d-flex flex-column align-items-center">
+                <Item item={item} />
+                <div className="d-flex gap-3">
+                    {(itemTree && itemTree.components[0]) ? drawUpViaComponentId(itemTree.components[0].MainItemId) : ""}
+                    {(itemTree && itemTree.components[1]) ? drawUpViaComponentId(itemTree.components[1].MainItemId) : ""}
                 </div>
-                <div className="d-flex justify-content-evenly">
-                    {
-                        itemTree.components?.map((componentTree, index) => {
-                            const itemId = componentTree.MainItemId;
-                            const item = findItemById(itemId);
-                            return <ItemWOnclick key={index} item={item} onClickFunction={null} />
-                        })
-                    }
-                </div>
-                <div className="d-flex justify-content-evenly">
-                    {
-                        itemTree.components?.map((componentTree) => componentTree.components)
-                        // ?.map((componentTree, index) => {
-                        //     console.log(componentTree)
-                        //     const itemId = componentTree.MainItemId;
-                        //     console.log(itemId)
-                        //     const item = findItemById(itemId);
-                        //     return <ItemWOnclick key={index} item={item} onClickFunction={null} />
-                        // })
-                    }
-                </div> */}
-                {
-                    drawItemTree(itemTree)
-
-                }
             </div>
-
         </div>
     );
 }
+

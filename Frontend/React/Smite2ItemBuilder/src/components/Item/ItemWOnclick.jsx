@@ -1,4 +1,4 @@
-import "./Item.css"
+import "./ItemWOnClick.css"
 
 export default function ItemWOnclick({ item, onClickFunction }) {
     if (item === undefined) return;
