@@ -1,8 +1,6 @@
 import SelectedItemInfo from "./SelectedItemInfo";
 import ItemInfoButtons from "./ItemInfoButtons";
 import ItemTree from "./ItemTree";
-import { useEffect, useState } from "react";
-
 
 export default function ItemInfo({ item, itemRecipes }) {
     const noShowProps = ["Name", "Id", "Tier", "Img", "Gold", "Passive", "Active"];

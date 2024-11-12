@@ -36,7 +36,8 @@ function NavBar() {
                         }
                     </ul>
 
-                    <Link className="nav-link" to="itemBuilder/addItem/1" onClick={(e) => handleSetCurrentLink(e.target.attributes.href.value)}>Sign In</Link>
+                    <Link className={(currentLink === "/" ? "nav-link active" : "nav-link")} to="/"
+                        onClick={(e) => handleSetCurrentLink(e.target.attributes.href.value)}>Sign In</Link>
                     <img src={"/LoginIcon.png"}
                         alt="LoginIcon" height={30}
                         className="m-2" />

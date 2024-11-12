@@ -76,8 +76,7 @@ export default function ItemTree({ item, itemRecipes }) {
             return (
                 <div className="d-flex flex-column align-items-center">
                     <Item item={mainItem} />
-                    <div className="d-flex gap-3 justify-content-center" style={{ width: 166 }}>
-                    </div>
+                    <div className="d-flex gap-3 justify-content-center" style={{ width: 166 }}></div>
                 </div>
             )
         }
