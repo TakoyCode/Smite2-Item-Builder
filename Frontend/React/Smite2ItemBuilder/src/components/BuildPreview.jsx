@@ -27,8 +27,15 @@ export default function BuildPreview() {
     }
 
     return (
-        <div className="p-2 d-flex flex-column justify-content-center align-items-center border border-warning" style={{ color: "rgb(191, 183, 180)" }}>
-            <div className="d-flex">
+        <div className="d-flex flex-column align-items-center rounded"
+            style={{ color: "rgb(191, 183, 180)", minWidth: 400, outline: "2px solid rgb(221, 161, 70)" }}>
+            <h3 className="text-center mb-5 pt-3">Build</h3>
+            <div className="d-flex justify-content-center flex-wrap gap-4" style={{ width: 300 }}>
+                {
+                    createClickableItems()
+                }
+            </div>
+            {/* <div className="d-flex">
                 <ItemCategory CategoryName="Starter" itemCount={3} />
                 <div>
                     <div>info</div>
@@ -43,12 +50,7 @@ export default function BuildPreview() {
                         </div>
                     </div>
                 </div>
-            </div>
-            <div className="d-flex flex-wrap gap-4" style={{ width: 300 }}>
-                {
-                    createClickableItems()
-                }
-            </div>
+            </div> */}
             {/* <ItemCategory CategoryName="Damage" itemCount={6} />
             <ItemCategory CategoryName="Defensive" itemCount={6} />
             <ItemCategory CategoryName="Utility" itemCount={6} /> */}
