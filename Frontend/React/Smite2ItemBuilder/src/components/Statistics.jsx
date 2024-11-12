@@ -51,8 +51,8 @@ export default function Statistics({ build }) {
                                     alt={stat} style={{ width: 30, height: 30, }} />
                                 <div>{stat}:</div>
                                 <div className="buildStats ms-auto">
-                                    {buildStats[stat] ? buildStats[stat] : ""}
-                                    {showPropsInPercent.includes(stat) && buildStats[stat] ? "%" : ""}
+                                    {buildStats[stat] ? buildStats[stat] : 0}
+                                    {showPropsInPercent.includes(stat) ? "%" : ""}
                                 </div>
                             </div>
                         )
