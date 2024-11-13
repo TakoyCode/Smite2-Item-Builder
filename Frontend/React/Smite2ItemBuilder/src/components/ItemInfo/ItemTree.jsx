@@ -99,7 +99,7 @@ export default function ItemTree({ item, itemRecipes }) {
     return (
         <div className="d-flex flex-column justify-content-center rounded mt-3" style={{ height: "45%", background: " rgb(26, 40, 57)" }}>
             <div className="d-flex flex-column align-items-center">
-                <Item item={item} />
+                <Item item={item} selected={true} />
                 <div className="d-flex gap-3">
                     {(itemTree && itemTree.components[0]) ? drawUpViaComponentId(itemTree.components[0].MainItemId) : ""}
                     {(itemTree && itemTree.components[1]) ? drawUpViaComponentId(itemTree.components[1].MainItemId) : ""}

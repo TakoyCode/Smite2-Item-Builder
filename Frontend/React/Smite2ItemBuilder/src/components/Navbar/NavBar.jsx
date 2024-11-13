@@ -10,9 +10,9 @@ function NavBar() {
     const handleSetCurrentLink = (href) => { setCurrentLink(href); }
 
     const textLinks = [
-        { href: "/", Text: "Gods" },
+        { href: "#", Text: "Gods" },
         { href: "/items", Text: "Items" },
-        { href: "/", Text: "Builds" },
+        { href: "#", Text: "Builds" },
         { href: "/itemBuilder", Text: "Item Builder" },
     ];
 
@@ -29,14 +29,15 @@ function NavBar() {
                         {
                             textLinks.map((link, i) => (
                                 <li className="nav-item ms-3" key={i}>
-                                    <Link className={(currentLink === link.href ? "nav-link active" : "nav-link")} to={link.href}
-                                        onClick={() => handleSetCurrentLink(link.href)}>{link.Text}</Link>
+                                    <Link className={(currentLink === link.href ? "nav-link active" : "nav-link") + " " +
+                                        (link.href === "#" ? "disabled" : "")}
+                                        to={link.href} onClick={() => handleSetCurrentLink(link.href)}>{link.Text}</Link>
                                 </li>
                             ))
                         }
                     </ul>
 
-                    <Link className={(currentLink === "/" ? "nav-link active" : "nav-link")} to="/"
+                    <Link className={(currentLink === "#" ? "nav-link disabled active" : "nav-link") + " disabled"} to="/"
                         onClick={(e) => handleSetCurrentLink(e.target.attributes.href.value)}>Sign In</Link>
                     <img src={"/LoginIcon.png"}
                         alt="LoginIcon" height={30}
